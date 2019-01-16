@@ -42,15 +42,12 @@ function GitMerge([string]$branch)
   Invoke-Expression "git merge $branch";
 }
 
-function GitCommit([string]$message, [bool]$autoStage)
+function GitCommit([string]$message)
 {
   # Example:
   #   GitCommit("My message goes here")($true);
 
-  $args = "";
-  if ($autoStage) { $args = "-a"; }
-
-  Invoke-Expression "git commit -m ""$message"" $args";
+  Invoke-Expression "git commit -m ""$message"" -a -v";
 }
 
 function GitPull([string] $remote, [string] $branch)

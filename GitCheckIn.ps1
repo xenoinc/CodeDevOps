@@ -10,7 +10,7 @@
 # Commandline Params ---
 param (
   [Parameter(Mandatory=$true)][string]$msg,
-  [Parameter(Mandatory=$false)][switch]$a = $false,
+  [Parameter(Mandatory=$false)][switch]$noPush = $false,
   [Parameter(Mandatory=$false)][switch]$help = $false
 );
 
@@ -23,26 +23,27 @@ if ($h -eq $true)
   Write-Host "Git Check-in HELP";
   Write-Host "-----------------";
   Write-Host "Pushes branch to remote device" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin ""<MESSAGE>""      Check-in code with message" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin ""<MESSAGE>"" -a   Check-in including all untracked files" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin -h                 This help text" -ForegroundColor Yellow;
+  Write-Host "  GitCheckin ""<MESSAGE>""          Check-in code with message and auto-PUSH" -ForegroundColor Yellow;
+  Write-Host "  GitCheckin ""<MESSAGE>"" -noPush  Check-in but DO NOT push changes" -ForegroundColor Yellow;
+  Write-Host "  GitCheckin -h                     This help text" -ForegroundColor Yellow;
   Write-Host "";
   exit;
 }
 
-Write-Host "Git Commiting and Pushing..." -ForegroundColor yellow;
-
-$branch = GitCurrentBranch;
+[string]$branch = GitCurrentBranch;
 if ($branch.Trim() -eq "")
 {
   Write-Host "No repository found in currect directory." -ForegroundColor red;
   exit;
 }
 
-# Write-Output "Input message: '$msg' and add-all: '$a'";
-
+Write-Host "Git Commiting..." -ForegroundColor yellow;
 GitCommit($msg)($a);
-GitPush("origin")($branch);
-# GitPush;
 
-Write-Host "Done!";
+if ($noPush -eq $false)
+{
+  Write-Host "Git Commiting..." -ForegroundColor yellow;
+  GitPush("origin")($branch);
+}
+
+Write-Host "Done!" -ForegroundColor Green;
