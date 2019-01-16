@@ -1,44 +1,47 @@
 <#
   Git commandline helpers for PowerShell
   Author: Damian Suess
-  Revision: 1 - 2019-01-02
+  Revision: 1 - 2019-01-16
 
   Usage:
-    GitPull           ; Pulls current branch without tracking
-    GitPull -track    ; Pulls branch and sets tracking so you can simply execute, ``git push`` next time
+    GitPull             ; Pulls current branch defaulting remote to "origin"
+    GitPull "NotOrigin" ; Pulls current branch from specified remote
 
   TODO:
-  - Get branch
-  - Exec command: ``git.exe push --progress "origin" feature/PomodoroInit:feature/PomodoroInit``
+    - Pulls branch and sets tracking so you can simply execute, ``git push`` next time
+      GitPull "NotOrigin" -track
 
   Change Log:
-    2019-01-02  0.1 - Created
+    2019-01-16  0.1 - Created
 #>
 
 # Commandline Params ---
 param(
-  [parameter(Mandatory=$false)][switch] $track = $false
+  [parameter(Mandatory=$false)][string] $remote = "origin"
+  # ,[parameter(Mandatory=$false)][switch] $track = $false
 );
 
 # Include Files --------
 . "GitHelpers.ps1";
 
 # Our code -------------
-$branch = GitCurrentBranch;
-$branch = $branch.Trim();
-if ($branch -eq "")
+[string] $branchName = GitCurrentBranch;
+if ($branchName.Trim() -eq "")
 {
   Write-Host "No repository found in currect directory." -ForegroundColor Red;
   exit;
 }
 
-if ($track)
-{
-  Write-Host "Pushing branch with tracking..." -ForegroundColor Green;
-  Invoke-Expression "git push -u --progress ""origin"" ""${branch}""";
-}
-else
-{
-  Write-Host "Pushing branch..." -ForegroundColor Green;
-  Invoke-Expression "git push --progress ""origin"" ""${branch}:${branch}""";
-}
+Write-Host "Pulling branch '${branchName}' from origin remote '${remote}'..." -ForegroundColor Green;
+GitPull($remote)($branchName);
+
+# if ($track)
+# {
+#   Write-Host "Pulling branch '${branchName}' with tracking..." -ForegroundColor Green;
+#   GitPull($remote)($branchName)($true)
+# }
+# else
+# {
+#   Write-Host "Pulling branch '${branchName}'..." -ForegroundColor Green;
+#   GitPull($remote)($branchName)($false);
+# }

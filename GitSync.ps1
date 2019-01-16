@@ -6,7 +6,7 @@
   Usage:
     GitSync         ; Sync current branch with develop
     GitSync -push   ; Sync current branch with develop and push changes (syncing branch)
-  
+
   TODO:
     - GitCheckIn $message (check-in/push)
     - Option "-track" to set tracking; don't track by default
@@ -16,10 +16,10 @@
   2018-07-30  0.1 - Created
 #>
 
+# Commandline Params ---
 param(
   [parameter(Mandatory=$false)][switch] $push = $false
 );
-
 
 # Clear out cache of previous PowerShell sessions
 #Remove-Variable * -ErrorAction SilentlyContinue;
@@ -27,9 +27,10 @@ param(
 #$error.Clear();
 ## Clear-Host;
 
-# Include Files
-. "GitTools.ps1";
+# Include Files --------
+. "GitHelpers.ps1";
 
+# Our code -------------
 Write-Host "------------------------------" -ForegroundColor Yellow;
 Write-Host "Syncing with develop branch..." -ForegroundColor Yellow;
 

@@ -37,11 +37,6 @@ function GitCheckout([string]$branch)
   Invoke-Expression "git checkout $branch";
 }
 
-function GitPull()
-{
-  Invoke-Expression "git pull";
-}
-
 function GitMerge([string]$branch)
 {
   Invoke-Expression "git merge $branch";
@@ -58,22 +53,63 @@ function GitCommit([string]$message, [bool]$autoStage)
   Invoke-Expression "git commit -m ""$message"" $args";
 }
 
-function GitPush([string] $remote, [string] $branch)
+function GitPull([string] $remote, [string] $branch)
 {
   # Example:
-  #   GitPush("origin")("MyBranch");
+  #   Pull and set tracking - GitPull("origin")("MyBranch")(true);
+  #   Pull with no tracking - GitPull("origin")("MyBranch")(false);
+  #
+  # Consider adding, [bool] $withTracking=true
+  # git branch --set-upstream-to=origin/<branch> feature-en-InsertCfg-ROI
 
-  write-host "'$remote'";
-  write-host "'$branch'";
+  Invoke-Expression "git pull ""${remote}"" ""${branch}""";
+}
+
+function GitPush([string] $remote, [string] $branch, [bool] $withTracking)
+{
+  # Example:
+  #   GitPush("origin")("MyBranch");          - Push without setting tracking
+  #   GitPush("origin")("MyBranch")($true);   - Push with tracking
 
   # Set Tracking: Invoke-Expression "git push -u --progress ""${remote}"" ""${branch}""";
   # No Tracking:  Invoke-Expression "git push --progress ""origin"" ""${branch}:${branch}""";
-  
-  if (($remote -ne "") -and ($branch -ne "")) {
-    Invoke-Expression "git push -u --progress ""${remote}"" ""${branch}""";
-  } else {
-    Invoke-Expression "git push";
+
+  if ($withTracking -eq $true)
+  {
+    # With setting tracking. Required remote and branch name to be set
+    if ($remote.Trim() -eq "") {
+      Write-Host "ERROR[1]: Remote name was not provided. It is required for to set tracking." -ForegroundColor Red;
+    } elseif ($branch.Trim() -eq "") {
+      Write-Host "ERROR[2]: Branch name was not provided. It is required for to set tracking." -ForegroundColor Red;
+    }
+    else
+    {
+      Write-Host ">>[1] Pushing branch (${branch}) to remote (${remote}) with tracking..." -ForegroundColor Blue;
+      Invoke-Expression "git push -u --progress ""${remote}"" ""${branch}""";
+    }
   }
+  else
+  {
+    # No tracking
+    if (($remote.Trim() -ne "") -and ($branch.Trim() -ne ""))
+    {
+      Write-Host ">>[2] Pushing branch (${branch}) to remote (${remote}) without tracking" -ForegroundColor Blue;
+      Invoke-Expression "git push --progress ""${remote}"" ""${branch}:${branch}""";
+      # OLD: Invoke-Expression "git push -u --progress ""${remote}"" ""${branch}""";
+    }
+    else
+    {
+      Write-Host ">>[3] Pushing branch to default remote (origin) without tracking" -ForegroundColor Blue;
+      Invoke-Expression "git push";
+    }
+  }
+
+  # OLD
+  # if (($remote.Trim() -ne "") -and ($branch.Trim() -ne "")) {
+  #   Invoke-Expression "git push -u --progress ""${remote}"" ""${branch}""";
+  # } else {
+  #   Invoke-Expression "git push";
+  # }
 }
 
 function IsNull($objectToCheck) {
