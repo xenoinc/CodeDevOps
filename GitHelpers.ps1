@@ -1,16 +1,17 @@
 <#
   Git Helpers for PowerShell
-  Author: Damian Suess
-  Revision: 2.b - 2018-07-30 (2018-10-03)
+  Author: Damian Suess  - 2018-07-30
+  Revision: 3 - 2019-01-16
 
   TODO:
     - GitCheckIn $message (check-in/push)
     - GitPush - Set branch tracking or no tracking
 
   Change Log:
-  2019-01-02  0.2b  - Added notes for GitPush without tracking branch
-  2018-10-03  0.2   - Some enhancements
-  2018-07-30  0.1   - Created
+  2019-01-16 - 0.3  - Added GitPull and cleaned up functions
+  2019-01-02 - 0.2b - Added notes for GitPush without tracking branch
+  2018-10-03 - 0.2  - Some enhancements
+  2018-07-30 - 0.1  - Created
 #>
 
 # Clear out cache of previous PowerShell sessions

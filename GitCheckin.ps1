@@ -1,10 +1,13 @@
 <#
   Git Helpers for PowerShell
-  Author: Damian Suess
-  Revision: 2 - 2018-07-30 (2018-10-03)
+  Author: Damian Suess  -  2018-07-30
+  Revision: 3 - 2019-01-16
 
   Resources:
   https://stackoverflow.com/questions/2157554/how-to-handle-command-line-arguments-in-powershell
+
+  Change Log:
+  2019-01-16 - 0.3  - Cleaned up functionality and added help
 #>
 
 # Commandline Params ---
