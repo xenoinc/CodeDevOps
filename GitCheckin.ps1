@@ -33,6 +33,12 @@ if ($h -eq $true)
   exit;
 }
 
+if ($msg.Trim() -eq "")
+{
+  Write-Host "You must supply a commit message!" -ForegroundColor red;
+  exit;
+}
+
 [string]$branch = GitCurrentBranch;
 if ($branch.Trim() -eq "")
 {
