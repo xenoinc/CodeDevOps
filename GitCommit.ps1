@@ -7,7 +7,8 @@
   https://stackoverflow.com/questions/2157554/how-to-handle-command-line-arguments-in-powershell
 
   Change Log:
-  2019-01-16 - 0.3  - Cleaned up functionality and added help
+  2019-0321 - 4 - Renamed from GitCheckin to GitCommit, cause it is
+  2019-0116 - 3 - Cleaned up functionality and added help
 #>
 
 # Commandline Params ---
@@ -23,12 +24,12 @@ param (
 # Our code -------------
 if ($h -eq $true)
 {
-  Write-Host "Git Check-in HELP";
+  Write-Host "Git Commit HELP";
   Write-Host "-----------------";
   Write-Host "Pushes branch to remote device" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin ""<MESSAGE>""        Check-in code with message and auto-PUSH" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin ""<MESSAGE>"" -push  Check-in but DO NOT push changes" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin -h                   This help text" -ForegroundColor Yellow;
+  Write-Host "  GitCommit ""<MESSAGE>""        Check-in code with message and auto-PUSH" -ForegroundColor Yellow;
+  Write-Host "  GitCommit ""<MESSAGE>"" -push  Check-in but DO NOT push changes" -ForegroundColor Yellow;
+  Write-Host "  GitCommit -h                   This help text" -ForegroundColor Yellow;
   Write-Host "";
   exit;
 }
