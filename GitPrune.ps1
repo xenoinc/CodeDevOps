@@ -5,7 +5,7 @@
 
   Usage:
     GitPrune        ; Regular fetch and prune (fetch -p)
-    GitPrune -full  ; Remote fetch & prune, plus sync with server
+    GitPrune -sync  ; Remote fetch & prune, plus sync with server
 
   TODO:
     [ ] Output which branches were removed by prune
@@ -17,7 +17,7 @@
 
 # Commandline Params ---
 param(
-  [parameter(Mandatory=$false)][switch] $full = $false
+  [parameter(Mandatory=$false)][switch] $sync = $false
 );
 
 # Include Files --------
@@ -25,7 +25,7 @@ param(
 
 # Our code -------------
 [string] $pruneType = "";
-if ($full -eq $true)
+if ($sync -eq $true)
 {
   $pruneType = "with remote sync ";
   GitPrune($true);
