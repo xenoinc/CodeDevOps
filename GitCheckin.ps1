@@ -13,7 +13,7 @@
 # Commandline Params ---
 param (
   [Parameter(Mandatory=$true)][string]$msg,
-  [Parameter(Mandatory=$false)][switch]$noPush = $false,
+  [Parameter(Mandatory=$false)][switch]$push = $false,
   [Parameter(Mandatory=$false)][switch]$help = $false
 );
 
@@ -26,9 +26,9 @@ if ($h -eq $true)
   Write-Host "Git Check-in HELP";
   Write-Host "-----------------";
   Write-Host "Pushes branch to remote device" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin ""<MESSAGE>""          Check-in code with message and auto-PUSH" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin ""<MESSAGE>"" -noPush  Check-in but DO NOT push changes" -ForegroundColor Yellow;
-  Write-Host "  GitCheckin -h                     This help text" -ForegroundColor Yellow;
+  Write-Host "  GitCheckin ""<MESSAGE>""        Check-in code with message and auto-PUSH" -ForegroundColor Yellow;
+  Write-Host "  GitCheckin ""<MESSAGE>"" -push  Check-in but DO NOT push changes" -ForegroundColor Yellow;
+  Write-Host "  GitCheckin -h                   This help text" -ForegroundColor Yellow;
   Write-Host "";
   exit;
 }
@@ -49,7 +49,7 @@ if ($branch.Trim() -eq "")
 Write-Host "Git Commiting..." -ForegroundColor yellow;
 GitCommit($msg)($a);
 
-if ($noPush -eq $false)
+if ($push -eq $true)
 {
   Write-Host "Git Commiting..." -ForegroundColor yellow;
   GitPush("origin")($branch);

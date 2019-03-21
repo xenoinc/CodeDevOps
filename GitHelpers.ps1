@@ -60,7 +60,7 @@ function GitFetch([bool] $prune)
   [string] $p = "";
   if ($prune -eq $true) { $p = "-p"; }
 
-  Invoke-Expression "git fetch ${p}";
+  Invoke-Expression "git fetch -v ${p}";
 }
 
 function GitMerge([string]$branch)
@@ -74,6 +74,8 @@ function GitPrune([bool] $syncPrune)
 
   if ($syncPrune -eq $true)
   {
+    Write-Host "Syncing with server..." -ForegroundColor Blue;
+
     # %   - ForEach-Object
     # sls - Select-String
     git branch -vv | sls gone `
