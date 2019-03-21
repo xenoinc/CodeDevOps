@@ -1,17 +1,25 @@
 <#
   Git Helpers for PowerShell
   Author: Damian Suess  - 2018-07-30
-  Revision: 3 - 2019-01-16
+  Revision: 4 - 2019-03-21
+  Description:
+    Collection of Git helper functions in PowerShell
+
+  Note:
+    We do recommend installing 'posh-git' as it integrates seemlessly into your command line
+    https://github.com/dahlbyk/posh-git
 
   TODO:
-    - GitCheckIn $message (check-in/push)
-    - GitPush - Set branch tracking or no tracking
+    [ ] GitCheckIn $message (check-in/push)
+    [ ] GitPush - Set branch tracking or no tracking
+    [ ] Integrate our GitHelpers into PowerShell commands via PowerShellGet\Install-Module Xeno-GitDevOps
 
   Change Log:
-  2019-01-16 - 0.3  - Added GitPull and cleaned up functions
-  2019-01-02 - 0.2b - Added notes for GitPush without tracking branch
-  2018-10-03 - 0.2  - Some enhancements
-  2018-07-30 - 0.1  - Created
+    2019-03-21 - 4  - Added GitPrune with sync, GitStatus, added notes
+    2019-01-16 - 3  - Added GitPull and cleaned up functions
+    2019-01-02 - 2b - Added notes for GitPush without tracking branch
+    2018-10-03 - 2  - Some enhancements
+    2018-07-30 - 1  - Created
 #>
 
 # Clear out cache of previous PowerShell sessions
@@ -20,7 +28,8 @@
 #$error.Clear();
 # Clear-Host;
 
-function GitCurrentBranch() {
+function GitCurrentBranch()
+{
   $cmd = Invoke-Expression "git rev-parse --abbrev-ref HEAD";
   # $cmd = git rev-parse --abbrev-ref HEAD | Out-String
 
@@ -38,17 +47,39 @@ function GitCheckout([string]$branch)
   Invoke-Expression "git checkout $branch";
 }
 
-function GitMerge([string]$branch)
-{
-  Invoke-Expression "git merge $branch";
-}
-
 function GitCommit([string]$message)
 {
   # Example:
   #   GitCommit("My message goes here")($true);
 
   Invoke-Expression "git commit -m ""$message"" -a -v";
+}
+
+function GitFetch([bool] $prune)
+{
+  [string] $p = "";
+  if ($prune -eq $true) { $p = "-p"; }
+
+  Invoke-Expression "git fetch ${p}";
+}
+
+function GitMerge([string]$branch)
+{
+  Invoke-Expression "git merge ""$branch""";
+}
+
+function GitPrune([bool] $syncPrune)
+{
+  GitFetch($true);
+
+  if ($syncPrune -eq $true)
+  {
+    # %   - ForEach-Object
+    # sls - Select-String
+    git branch -vv | sls gone `
+      |% { $_.ToString().Trim() -split '\s+' | Select-Object -first 1 } `
+      |% { git branch -D $_ }
+  }
 }
 
 function GitPull([string] $remote, [string] $branch)
@@ -108,6 +139,53 @@ function GitPush([string] $remote, [string] $branch, [bool] $withTracking)
   # } else {
   #   Invoke-Expression "git push";
   # }
+}
+
+function GitStatus()
+{
+  [bool] $untracked = $false;
+  [int] $added = 0;
+  [int] $modified = 0;
+  [int] $deleted = 0;
+  [bool] $ahead = $false;
+  [int] $aheadCount = 0;
+
+  [string] $output = Invoke-Expression "git status";
+  [string] $branch = GitCurrentBranch;
+  # $branches = $output[0].Split(' ');
+  # [string] $branch = $branches[$branches.Length -1];
+
+  $output | ForEach-Object {
+    if ($_ -match "^\#.*origin/.*' by (\d+) commit.*") {
+      $aheadCount = $matches[1];
+      $ahead = $true;
+    } elseif ($_ -match "deleted:") {
+      $deleted += 1;
+    } elseif (($_ -match "modified:") -or ($_ -match "renamed:")) {
+      $modified += 1
+    } elseif ($_ -match "new file:") {
+      $added += 1
+    } elseif ($_ -match "Untracked files:") {
+      $untracked = $true;
+    }
+  };
+
+  return @{"Untracked:" = $untracked;
+           "Added-Files:" = $added;
+           "Modified-Files:" = $modified;
+           "Deleted:" = $deleted;
+           "Ahead:" = $ahead;
+           "Ahead-Count:" = $aheadCount;
+           "Branch-Name:" = $branch};
+}
+
+function GitRepoName()
+{
+  $cmd = (git remote get-url origin).Split("/");
+  [string] $host = $cmd[-2];
+  [string] $repo = $cmd[-1];
+
+  return $host + "/" + $repo;
 }
 
 function IsNull($objectToCheck) {
