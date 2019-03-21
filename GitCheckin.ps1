@@ -33,9 +33,9 @@ if ($h -eq $true)
   exit;
 }
 
-if ($msg.Trim() -eq "")
+if ($msg.Trim() -eq [String]::Empty)
 {
-  Write-Host "You must supply a commit message!" -ForegroundColor red;
+  Write-Host "Missing input: You must supply a commit message!" -ForegroundColor red;
   exit;
 }
 
