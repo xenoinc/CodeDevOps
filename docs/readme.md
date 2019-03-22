@@ -63,6 +63,8 @@ Validation files:
 #### Update Dependencies (-ud)
 Update project dependencies using project's MSBuild script
 
+
 ## Reference
 * [PowerShell Set-Alias](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/set-alias?view=powershell-6)
-
+* Install PS commands [Example](https://github.com/Unitrends/unitrends-pstoolkit)
+    * Downloads, extracts, installs, validates, cleanup
