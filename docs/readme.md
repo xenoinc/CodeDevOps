@@ -6,11 +6,18 @@ Under the main root folder should just be DevOps or something else which will co
 ## Installation
 We could use ``DevOps -install`` to register our CmdLets.
 
-
 ### Set session alias
 ```powershell
 Set-Alias -Name GitPull -Value "C:\BuildTools\Common\Git\GitPull.ps1"
 ```
+
+### Commands
+* ``$profile``
+* ``Get-Module -listavailable`` - List available PS commands
+* ``Import-Module <MyFunction>`` - Use the module
+* ``Get-Command -module <MyFunction>`` - Get list of functions in your module
+
+ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-5.1
 
 ## Folder Structure
 Below is the suggested folder structure for BuildTools so we don't just have a folder of cluttered shit.
