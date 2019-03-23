@@ -1,0 +1,1 @@
+MSBuild /t:UpdateDependencies
