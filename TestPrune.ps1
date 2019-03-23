@@ -7,9 +7,12 @@ $remotes = New-Object System.Collections.ArrayList;
 # [string[]] $remotes;
 # [string] $remote = "origin";
 
+Write-Host "Starting...";
+
 $list.ForEach({
   $ndx = $_.Trim();
-  Write-Host $ndx;
+  # Write-Host $ndx;
+
   if ($ndx.SubString(0,1) -eq "*") {
     $curBranch = $ndx.SubString(2);
   }
