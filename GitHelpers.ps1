@@ -76,12 +76,52 @@ function GitPrune([bool] $syncPrune)
   {
     Write-Host "Syncing with server..." -ForegroundColor Blue;
 
+    [string[]] $list = git branch -a;
+    [string] $curBranch = "";
+    [string] $branch = "";
+    $locals = New-Object System.Collections.ArrayList;
+    $remotes = New-Object System.Collections.ArrayList;
+    Write-Host "Starting...";
+
+    $list.ForEach({
+      $ndx = $_.Trim();
+
+      if ($ndx.SubString(0,1) -eq "*") {
+        $curBranch = $ndx.SubString(2);
+      }
+
+      [string[]] $elements = $ndx.Split("/");
+      if ($elements[0] -eq "remotes") {
+        $null, $null, $elements = $elements;
+        $branch = $elements -Join "/";
+        $remotes.Add($branch);
+      } else {
+        if ($ndx.SubString(0, 1) -eq "*") {
+          $ndx = $ndx.SubString(2);
+        }
+        $locals.Add($ndx);
+      }
+    });
+
+    $locals.ForEach({
+      #
+      # TODO: Add whitelist - i.e. master, develop
+      #
+      # Pre-check
+      if ($remotes.Contains($_) -eq $false -and $_ -eq $curBranch) {
+        Write-Host "WARNING: Current branch doesn't exist on remote anymore!" -ForegroundColor Red;
+      } elseif ($remotes.Contains($_) -eq $false -and $_ -ne $curBranch) {
+        Write-Host "DELETE ME: '$_'" -ForegroundColor Yellow;
+      }
+    });
+
+    # OLD METHOD:
     # %   - ForEach-Object
     # sls - Select-String
-    git branch -vv | sls gone `
-      |% { $_.ToString().Trim() -split '\s+' | Select-Object -first 1 } `
-      |% { git branch -D $_ }
-    
+    #git branch -vv | sls gone `
+    #  |% { $_.ToString().Trim() -split '\s+' | Select-Object -first 1 } `
+    #  |% { git branch -D $_ }
+    ################33
     # Alt Solutions:
     # 1. Use ``$list = git branch -a`` after a fetch with prune, and compare
     #    anything starting with "remotes/origin/" against those not starting
