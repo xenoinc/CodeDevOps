@@ -104,6 +104,7 @@ function GitPrune([bool] $syncPrune)
     ##    ``% { $_.toString().Split(" ")[0]}``  Get the branch name
     ##    ``% {git branch -d $_}``              Deletes the branch
     #
+  }
 }
 
 function GitPull([string] $remote, [string] $branch)
