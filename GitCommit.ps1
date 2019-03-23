@@ -6,6 +6,10 @@
   Resources:
   https://stackoverflow.com/questions/2157554/how-to-handle-command-line-arguments-in-powershell
 
+  TO DO:
+  [ ] Add -a switch to add all new files to commit
+  [ ] Add -o to specify repo if other than, "Origin"
+
   Change Log:
   2019-0321 - 4 - Renamed from GitCheckin to GitCommit, cause it is
   2019-0116 - 3 - Cleaned up functionality and added help

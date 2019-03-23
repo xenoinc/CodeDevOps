@@ -1,4 +1,4 @@
-# DevOps
+# DevOps Future
 Consider moving all PowerShell script scripts under the ``Common`` subfolder and only keep ``DevOps.ps1`` in the root (_C:\BuildTools_).
 
 Under the main root folder should just be DevOps or something else which will contain an ``-install`` parameter which will register CmdLets via ``Set-Alias``.
