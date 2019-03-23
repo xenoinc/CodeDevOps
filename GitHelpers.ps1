@@ -81,7 +81,29 @@ function GitPrune([bool] $syncPrune)
     git branch -vv | sls gone `
       |% { $_.ToString().Trim() -split '\s+' | Select-Object -first 1 } `
       |% { git branch -D $_ }
-  }
+    
+    # Alt Solutions:
+    # 1. Use ``$list = git branch -a`` after a fetch with prune, and compare
+    #    anything starting with "remotes/origin/" against those not starting
+    #    and delete what's missing. To show item, use ``$list[2]`` to show 3rd item.
+    #    NOTE:
+    #     You must remove the 1st 2 characters and can't delete the one starting with "*".
+    #     "*" is your current branch.
+    #
+    #    Note2:
+    #     List each item. $_ contains the current item in $list
+    #      ``foreach-object -inputobject $list {$_}``
+    #
+    # 2. ``git branch -vv`` This requires
+    #   git checkout master; git remote update origin --prune; git branch -vv | Select-String -Pattern ": gone]" | % { $_.toString().Trim().Split(" ")[0]} | % {git branch -d $_}
+    #
+    ##    ``git checkout master``               Switches to the master branch
+    ##    ``git remote update origin --prune``  Prunes remote branches
+    ##    ``git branch -vv``                    Gets a verbose output of all branches (git reference)
+    ##    ``Select-String -Pattern ": gone]"``  Gets only the records where they have been removed from remote.
+    ##    ``% { $_.toString().Split(" ")[0]}``  Get the branch name
+    ##    ``% {git branch -d $_}``              Deletes the branch
+    #
 }
 
 function GitPull([string] $remote, [string] $branch)
@@ -184,8 +206,8 @@ function GitStatus()
 function GitRepoName()
 {
   $cmd = (git remote get-url origin).Split("/");
-  [string] $host = $cmd[-2];
-  [string] $repo = $cmd[-1];
+  [string] $host = $cmd[-2];  # 2nd to last element in array
+  [string] $repo = $cmd[-1];  # last element in array
 
   return $host + "/" + $repo;
 }

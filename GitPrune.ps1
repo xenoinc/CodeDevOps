@@ -7,10 +7,6 @@
     GitPrune        ; Regular fetch and prune (fetch -p)
     GitPrune -sync  ; Remote fetch & prune, plus sync with server
 
-  TODO:
-    [ ] Output which branches were removed by prune
-        listing "Remote" and "Local" seperately
-
   Change Log:
     2019-0321 - 0.1 - Created
 #>
