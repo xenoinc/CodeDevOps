@@ -77,10 +77,15 @@ function GitPrune([bool] $syncPrune)
     Write-Host "Syncing with server..." -ForegroundColor Blue;
 
     [string[]] $list = git branch -a;
-    [string] $curBranch = "";
-    [string] $branch = "";
+    [string] $curBranch = [String]::Empty;
+    [string] $branch = [String]::Empty;
     $locals = New-Object System.Collections.ArrayList;
     $remotes = New-Object System.Collections.ArrayList;
+    $whiteList = New-Object System.Collections.ArrayList;
+
+    $whiteList.Add("master");
+    $whiteList.Add("develop");
+
     Write-Host "Starting...";
 
     $list.ForEach({
@@ -102,6 +107,8 @@ function GitPrune([bool] $syncPrune)
         $locals.Add($ndx);
       }
     });
+
+    Write-Host "Current branch: ${curBranch}";
 
     $locals.ForEach({
       #
