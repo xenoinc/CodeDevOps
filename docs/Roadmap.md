@@ -19,6 +19,12 @@ Set-Alias -Name GitPull -Value "C:\BuildTools\Common\Git\GitPull.ps1"
 
 ref: https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_scopes?view=powershell-5.1
 
+### See Also
+By using Export-ModuleMember, we'll be able to install our git commands.
+
+Consider the [Example using Export-ModuleMember](https://github.com/dahlbyk/posh-git/blob/master/src/posh-git.psm1)
+from the Posh-Git project.
+
 ## Folder Structure
 Below is the suggested folder structure for BuildTools so we don't just have a folder of cluttered shit.
 
