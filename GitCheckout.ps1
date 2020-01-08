@@ -5,7 +5,7 @@
 
   Checkout (switch-to) branch.
   If it doesn't exist locally, check "remotes/origin/" by default. You can optionally
-  specify an different remote other than the default.
+  specify a different remote other than the default.
 
   Usage:
     GitCheckout "BranchName"          ; Checkout branch, origin as default
