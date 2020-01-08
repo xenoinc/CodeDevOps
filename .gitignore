@@ -3,3 +3,6 @@
 /NuGet.Config
 /NuGet.exe
 /Extras
+
+# Extras
+ud-local.bat
