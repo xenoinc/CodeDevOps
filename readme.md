@@ -35,6 +35,22 @@ _NOTE: You must have a "develop" branch_
 GitSync
 ```
 
+### GitCheckout
+Checks out your branch in the following execution order
+1. Attempt locally
+2. Attempt on ``origin``
+3. Fetch, then try ``origin`` again.
+
+_In the future we will provide the option for a different remote_
+
+#### Usage
+```
+GitCheckout MyBranch
+GitCheckout feature/MyBranch
+GitCheckout "feature/MyBranch"
+```
+
+
 ### GitCommit
 Commits changes with provided message. Optionally ``push``es up branch.
 
