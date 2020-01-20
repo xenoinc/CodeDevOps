@@ -13,6 +13,8 @@
     [ ] GitCheckIn $message (check-in/push)
     [ ] GitPush - Set branch tracking or no tracking
     [ ] Integrate our GitHelpers into PowerShell commands via PowerShellGet\Install-Module Xeno-GitDevOps
+    [ ] GitMerge opt to merge unrelated histories
+        - git.exe merge --allow-unrelated-histories develop
 
   Change Log:
     2019-03-21 - 4  - Added GitPrune with sync, GitStatus, added notes
@@ -68,6 +70,11 @@ function GitMerge([string]$branch)
   Invoke-Expression "git merge ""$branch""";
 }
 
+function GitMergeUnrelated([string]$branch)
+{
+  Invoke-Expression "git merge --allow-unrelated-histories ""$branch""";
+}
+
 function GitPrune([bool] $syncPrune)
 {
   GitFetch($true);
@@ -81,7 +88,7 @@ function GitPrune([bool] $syncPrune)
     git branch -vv | sls gone `
       |% { $_.ToString().Trim() -split '\s+' | Select-Object -first 1 } `
       |% { git branch -D $_ }
-    
+
     # Alt Solutions:
     # 1. Use ``$list = git branch -a`` after a fetch with prune, and compare
     #    anything starting with "remotes/origin/" against those not starting
