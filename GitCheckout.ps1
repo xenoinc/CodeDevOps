@@ -45,31 +45,40 @@ GitCheckout($branch);
 $branchName = GitCurrentBranch;
 if ($branchName.Trim() -eq $branch.Trim())
 {
-  Write-Host "DevOps: Switched to $branch." -ForegroundColor Green;
+  Write-Host "DevOps: Switched to $branch locally." -ForegroundColor Green;
   exit;
 }
 
 # TODO - If optional remote provided, use it first
 # .. here ..
 
+## TODO:
+##  1. Check if branch exists remotely first
+##  2. If does not exist, fetch
+##  3. If does not exist, create a new one
+
 # Attempt to get it from origin
-Invoke-Expression "git checkout -b $branch remotes/origin/$branch";
+Write-Host "DevOps: Checking out remotely..." -ForegroundColor Yellow;
+
+# -b or not to -b ??
+Invoke-Expression "git checkout ""$branch"" ""remotes/origin/$branch""";
 $branchName = GitCurrentBranch;
 
 if ($branchName.Trim() -eq $branch.Trim())
 {
-  Write-Host "DevOps: Switched to $branch from remote." -ForegroundColor Green;
+  Write-Host "DevOps: Switched to '$branch' from remote." -ForegroundColor Green;
   exit;
 }
 
 # Fetch and try again from origin
+Write-Host "DevOps: Branch not found. fetching..." -ForegroundColor Yellow;
 GitFetch;
 
-Invoke-Expression "git checkout -b $branch remotes/origin/$branch";
+Invoke-Expression "git checkout -b ""$branch"" ""remotes/origin/$branch""";
 $branchName = GitCurrentBranch;
 
 if ($branchName.Trim() -eq $branch.Trim())
 {
-  Write-Host "DevOps: Switched to $branch from remote after 'fetch'." -ForegroundColor Green;
+  Write-Host "DevOps: Switched to '$branch' from remote after 'fetch'." -ForegroundColor Green;
   exit;
 }
