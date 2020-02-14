@@ -1,5 +1,10 @@
+# Common ignore list
 /db
 /*.zip
 /NuGet.Config
 /NuGet.exe
 /Extras
+
+
+# Local only
+ud-local.bat
