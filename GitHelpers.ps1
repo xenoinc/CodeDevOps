@@ -114,16 +114,24 @@ function GitPrune([bool] $syncPrune)
   }
 }
 
-function GitPull([string] $remote, [string] $branch)
+function GitPull([string] $remote, [string] $branch, [bool] $unrelatedHistories = $false)
 {
   # Example:
-  #   Pull and set tracking - GitPull("origin")("MyBranch")(true);
-  #   Pull with no tracking - GitPull("origin")("MyBranch")(false);
+  #   Pull unrelated history - GitPull("origin")("MyBranch")($true);
   #
-  # Consider adding, [bool] $withTracking=true
-  # git branch --set-upstream-to=origin/<branch> feature-en-InsertCfg-ROI
+  # Consider adding, Pull and set tracking
+  #   PARAM:  [bool] $withTracking=true
+  #   CMD:    git branch --set-upstream-to=origin/<branch> feature-en-InsertCfg-ROI
+  #   Usage:  GitPull("origin")("MyBranch")($false)($true);
 
-  Invoke-Expression "git pull ""${remote}"" ""${branch}""";
+  [string] $cmdEx = "-v ";
+  if ($unrelatedHistories -eq $true)
+  {
+    # "git.exe pull --progress -v --no-rebase --allow-unrelated-histories "origin" master"
+    $cmdEx = "--allow-unrelated-histories ";
+  }
+
+  Invoke-Expression "git pull ${cmdEx}""${remote}"" ""${branch}""";
 }
 
 function GitPush([string] $remote, [string] $branch, [bool] $withTracking)
