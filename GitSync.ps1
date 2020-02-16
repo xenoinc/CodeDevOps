@@ -29,7 +29,7 @@ param(
 ## Clear-Host;
 
 # Include Files --------
-. "GitHelpers.ps1";
+. "lib/GitHelpers.ps1";
 
 # Our code -------------
 Write-Host "------------------------------" -ForegroundColor Yellow;

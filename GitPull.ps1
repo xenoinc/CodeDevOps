@@ -25,7 +25,7 @@ param(
 );
 
 # Include Files --------
-. "GitHelpers.ps1";
+. "lib/GitHelpers.ps1";
 
 # Our code -------------
 if ($h -eq $true)
