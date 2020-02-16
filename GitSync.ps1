@@ -10,6 +10,7 @@
   TODO:
     - GitCheckIn $message (check-in/push)
     - Option "-track" to set tracking; don't track by default
+    - Option "-u" "-uh" to merge unrelated histories
 
   Change Log:
   2018-10-03  0.2 - Some enhancements
