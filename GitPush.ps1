@@ -28,7 +28,7 @@ param(
 # Our code -------------
 if ($h -eq $true)
 {
-  Write-Host "Git Push HELP";
+  Write-Host "GitPush HELP";
   Write-Host "-------------";
   Write-Host "Pushes branch to remote device" -ForegroundColor Yellow;
   Write-Host "  GitPush -t              Push current branch to ORIGIN and set branch tracking" -ForegroundColor Yellow;
