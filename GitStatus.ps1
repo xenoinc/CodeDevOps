@@ -11,7 +11,7 @@
 #>
 
 # Include Files --------
-. "lib/GitHelpers.ps1";
+. "$PSScriptRoot/lib/GitHelpers.ps1";
 
 # Our code -------------
 GitStatus;

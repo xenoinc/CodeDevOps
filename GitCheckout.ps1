@@ -29,7 +29,7 @@ param(
 );
 
 # Include Files --------
-. "lib/GitHelpers.ps1";
+. "$PSScriptRoot/lib/GitHelpers.ps1";
 
 # Our code -------------
 [string] $branchName = GitCurrentBranch;
