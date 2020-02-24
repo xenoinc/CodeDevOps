@@ -11,7 +11,7 @@
   TODO:
     - Pulls branch and sets tracking so you can simply execute, ``git push`` next time
       GitPull "NotOrigin" -track
-
+    - After pulling check for "fatal: refusing to merge unrelated histories" and suggest '-u' switch.
   Change Log:
     2019-01-16  0.1 - Created
 #>
