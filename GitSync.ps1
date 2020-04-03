@@ -19,7 +19,9 @@
 
 # Commandline Params ---
 param(
-  [parameter(Mandatory=$false)][switch] $push = $false
+  [parameter(Mandatory=$false)][switch] $push = $false,
+  [parameter(Mandatory=$false)][string] $syncBranch = "develop",
+  [parameter(Mandatory=$false)][string] $remote = "origin"
 );
 
 # Clear out cache of previous PowerShell sessions
@@ -29,7 +31,7 @@ param(
 ## Clear-Host;
 
 # Include Files --------
-. "GitHelpers.ps1";
+. "$PSScriptRoot/lib/GitHelpers.ps1";
 
 # Our code -------------
 Write-Host "------------------------------" -ForegroundColor Yellow;
@@ -44,11 +46,21 @@ if ($branch -eq "")
   exit;
 }
 
-GitCheckout("develop");
-GitPull;
+$syncBranch = "develop";
+
+Write-Host "Switching to ${syncBranch}..." -ForegroundColor Yellow;
+GitCheckout($syncBranch);
+
+Write-Host "Pulling latest..." -ForegroundColor Yellow;
+GitPull($remote)($syncBranch);
+
+Write-Host "Switching back to ${branch}..." -ForegroundColor Yellow;
 GitCheckout($branch);
-GitMerge("develop");
-Write-Host "Sync complete!" -ForegroundColor Green;
+
+Write-Host "Merging branches..." -ForegroundColor Yellow;
+GitMerge($syncBranch);
+
+Write-Host "Sync with '${syncBranch}' complete!" -ForegroundColor Green;
 
 # Automatically PUSH branch upstream via "-push" switch
 if ($push)

@@ -1,41 +1,46 @@
-# DevOps
-Development Operations for command line productivity with PowerShell on Windows. This is an internal tool used by Xeno Innovations, if you find it useful, use it.
+# PowerShell DevOps
+Development Operations for command line productivity using PowerShell.
 
-Well do our best to keep things generic for public use.
+This project started as an internal tool used by Xeno Innovations - hence the focus on git and the default ``develop`` branch. We'll do our best to keep things generic for the open source community.
 
 ## Installation
-We do plan on having an installer in the future. Since we're prototyping, use the following:
-
-1. Download or clone the repo to a folder (_i.e. ``C:\BuildTools\`` _)
+1. Download or clone the repo your local folder (_i.e. ``C:\BuildTools\``_)
 2. Set your ``Path`` **Environment Variables** to your extracted folder.
 3. Close and re-open any open command prompts
 4. _Enjoy!_
 
 
 ## Road map
-Currently Xeno-DevOps only supports shortcuts to Git commands. In the future we will have the following:
 * Install / update Xeno-DevOps from CLI
 * Update Visual Studio project rule sets
     * i.e. _EditorConfig, StyleCop, CodeMaid, Spelling_)
 * Create new project folder template
     * Makes standard folder structure, readme, MSBuild, rules, etc.
 
-# Use It
-## Git Commands
+# Using DevOps Git Commands
 The base library for all Git commands.
 
-### GitSync
-Synchronizes your current branch with ``develop`` branch.
+## [GitSync](https://github.com/xenoinc/XenoDevOps/wiki/GitSync)
+Synchronizes (``merge``) your current branch with another branch; using ``develop`` by default.
 
-``Check-out develop >> Pull latest >> Check-out branch >> Merge with develop``
-_NOTE: You must have a "develop" branch_
+### Usage:
+Syncing your branch with the latest develop branch.
 
-#### Usage:
+#### Xeno-DevOps Solution
+```powershell
+[feature/MyBranch]> GitSync
+Sync complete!
 ```
-GitSync
+
+#### Old Stinky Method
+```powershell
+[feature-MyBranch]> git checkout develop
+[develop]> git pull
+[develop]> git checkout feature-MyBranch
+[feature-MyBranch]> git merge develop
 ```
 
-### GitCheckout
+## [GitCheckout](https://github.com/xenoinc/XenoDevOps/wiki/GitCheckout)
 Checks out your branch in the following execution order
 1. Attempt locally
 2. Attempt on ``origin``
@@ -43,36 +48,31 @@ Checks out your branch in the following execution order
 
 _In the future we will provide the option for a different remote_
 
-#### Usage
-```
+### Usage
+```powershell
 GitCheckout MyBranch
 GitCheckout feature/MyBranch
 GitCheckout "feature/MyBranch"
 ```
 
-
-### GitCommit
+## [GitCommit](https://github.com/xenoinc/XenoDevOps/wiki/GitCommit)
 Commits changes with provided message. Optionally ``push``es up branch.
 
-#### Usage
-```
+### Usage
+```powershell
+GitCommit "My message" -push
 GitCommit "My message" -push
 ```
 
-#### Usage
-* ``GitCheckIn "This is a commit message"`` - Commits and pushes
-* ``GitCheckIn "This is a commit message" -a`` - Not working currently
-
-### GitPrune
-Fetch and prune your repository. Optionally ``sync`` with remote, removing local branches no longer on remote.
+## [GitPrune](https://github.com/xenoinc/XenoDevOps/wiki/GitPrune)
+Fetch and prune your repository.
 
 #### Usage
-```
+```powershell
 GitPrune          ; Fetch and prune
-GitPrune -sync    ; Remove local branches already merged
 ```
 
-### GitPush
+### [GitPush](https://github.com/xenoinc/XenoDevOps/wiki/GitPush)
 Pushes your branch to ``origin`` without the annoying prompt when you're not tracking
 
 #### Usage
@@ -80,11 +80,11 @@ Pushes your branch to ``origin`` without the annoying prompt when you're not tra
 * ``GitPush -track`` Pushes up branch and sets to track your branch, giving accessibility to ``git push`` in the future.
 
 
-### GitStatus
+### [GitStatus](https://github.com/xenoinc/XenoDevOps/wiki/GitStatus)
 Report stats about your current branch
 
 #### Usage
-```
+```powershell
 GitStatus
 
 Results ===========================================
