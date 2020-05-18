@@ -18,6 +18,7 @@
 
   Change Log:
     2020-01-08  0.1 - Created
+    2020-05-05  0.2 - Updated error messages
 #>
 
 # git checkout -b feature-MyBranch remotes/origin/feature-MyBranch --
@@ -30,6 +31,8 @@ param(
 
 # Include Files --------
 . "$PSScriptRoot/lib/GitHelpers.ps1";
+
+$remote = "origin";
 
 # Our code -------------
 [string] $branchName = GitCurrentBranch;
@@ -57,11 +60,12 @@ if ($branchName.Trim() -eq $branch.Trim())
 ##  2. If does not exist, fetch
 ##  3. If does not exist, create a new one
 
-# Attempt to get it from origin
-Write-Host "DevOps: Checking out remotely..." -ForegroundColor Yellow;
+# Attempt to get it from remote repository
+Write-Host "DevOps: Branch does not exist locally." -ForegroundColor Yellow;
+Write-Host "DevOps: Checking for branch on remote, ""$remote""..." -ForegroundColor Yellow;
 
 # -b or not to -b ??
-Invoke-Expression "git checkout ""$branch"" ""remotes/origin/$branch""";
+Invoke-Expression "git checkout ""$branch"" ""remotes/$remote/$branch""";
 $branchName = GitCurrentBranch;
 
 if ($branchName.Trim() -eq $branch.Trim())
@@ -70,15 +74,20 @@ if ($branchName.Trim() -eq $branch.Trim())
   exit;
 }
 
-# Fetch and try again from origin
-Write-Host "DevOps: Branch not found. fetching..." -ForegroundColor Yellow;
+# Fetch and try again from remote repository
+Write-Host "DevOps: Branch not found on remote." -ForegroundColor Yellow;
+Write-Host "DevOps: Fetching latest..." -ForegroundColor Yellow;
 GitFetch;
 
-Invoke-Expression "git checkout -b ""$branch"" ""remotes/origin/$branch""";
+Invoke-Expression "git checkout -b ""$branch"" ""remotes/$remote/$branch""";
 $branchName = GitCurrentBranch;
 
 if ($branchName.Trim() -eq $branch.Trim())
 {
   Write-Host "DevOps: Switched to '$branch' from remote after 'fetch'." -ForegroundColor Green;
-  exit;
+}
+else
+{
+  Write-Host "DevOps: The branch, ""$branch"" could not be found on ""$remote""." - ForegroundColor Yellow;
+  Write-Host "DevOps: Check that the spelling and remote are correct, or create a new branch." - ForegroundColor Yellow; 
 }
