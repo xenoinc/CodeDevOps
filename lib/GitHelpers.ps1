@@ -13,6 +13,8 @@
     [ ] GitCheckIn $message (check-in/push)
     [ ] GitPush - Set branch tracking or no tracking
     [ ] Integrate our GitHelpers into PowerShell commands via PowerShellGet\Install-Module Xeno-GitDevOps
+    [ ] GitMerge opt to merge unrelated histories
+        - git.exe merge --allow-unrelated-histories develop
 
   Change Log:
     2019-03-21 - 4  - Added GitPrune with sync, GitStatus, added notes
@@ -66,6 +68,11 @@ function GitFetch([bool] $prune)
 function GitMerge([string]$branch)
 {
   Invoke-Expression "git merge ""$branch""";
+}
+
+function GitMergeUnrelated([string]$branch)
+{
+  Invoke-Expression "git merge --allow-unrelated-histories ""$branch""";
 }
 
 function GitPrune([bool] $syncPrune)
@@ -134,7 +141,7 @@ function GitPrune([bool] $syncPrune)
     #git branch -vv | sls gone `
     #  |% { $_.ToString().Trim() -split '\s+' | Select-Object -first 1 } `
     #  |% { git branch -D $_ }
-    ################33
+    ################
     # Alt Solutions:
     # 1. Use ``$list = git branch -a`` after a fetch with prune, and compare
     #    anything starting with "remotes/origin/" against those not starting
@@ -160,16 +167,24 @@ function GitPrune([bool] $syncPrune)
   }
 }
 
-function GitPull([string] $remote, [string] $branch)
+function GitPull([string] $remote, [string] $branch, [bool] $unrelatedHistories = $false)
 {
   # Example:
-  #   Pull and set tracking - GitPull("origin")("MyBranch")(true);
-  #   Pull with no tracking - GitPull("origin")("MyBranch")(false);
+  #   Pull unrelated history - GitPull("origin")("MyBranch")($true);
   #
-  # Consider adding, [bool] $withTracking=true
-  # git branch --set-upstream-to=origin/<branch> feature-en-InsertCfg-ROI
+  # Consider adding, Pull and set tracking
+  #   PARAM:  [bool] $withTracking=true
+  #   CMD:    git branch --set-upstream-to=origin/<branch> feature-en-InsertCfg-ROI
+  #   Usage:  GitPull("origin")("MyBranch")($false)($true);
 
-  Invoke-Expression "git pull ""${remote}"" ""${branch}""";
+  [string] $cmdEx = "-v ";
+  if ($unrelatedHistories -eq $true)
+  {
+    # "git.exe pull --progress -v --no-rebase --allow-unrelated-histories "origin" master"
+    $cmdEx = "--allow-unrelated-histories ";
+  }
+
+  Invoke-Expression "git pull ${cmdEx}""${remote}"" ""${branch}""";
 }
 
 function GitPush([string] $remote, [string] $branch, [bool] $withTracking)

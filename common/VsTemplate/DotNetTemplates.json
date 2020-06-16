@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "SandboxProject",
+    "Description" : "Minimalistic project for prototyping",
+    "Structure" : [
+      {
+        "/" : [".gitignore", "readme.md", ".editorconfig", "CodeMaid.config"]
+      }
+    ]
+  },
+  {
+    "Name": "RegularProject",
+    "Description" : "Standard project with coding standards wire-ups",
+    "Structure" :[
+      {
+        "/" : [".gitignore", "readme.md"],
+        "source/" : ["CodeMaid.config", ".editorconfig", "stylecop.json", "stylecop.ruleset", ".vsspell"]
+      }
+    ]
+  },
+  {
+    "Name": "ProProject",
+    "Description" : "Professional project with coding standards and MSBuild wire-ups",
+    "Structure" :[
+      {
+        "/" : [".gitignore", "readme.md", "build.proj", "BuildProperties.resx"],
+        "source/" : ["CodeMaid.config", ".editorconfig", "stylecop.json", "stylecop.ruleset", ".vsspell"],
+        "docs/" : ["readme.md"]
+      }
+    ]
+  }
+]

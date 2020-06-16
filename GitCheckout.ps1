@@ -18,9 +18,10 @@
 
   Change Log:
     2020-01-08  0.1 - Created
+    2020-05-05  0.2 - Updated error messages
 #>
-
 # git checkout -b feature-MyBranch remotes/origin/feature-MyBranch --
+
 
 # Commandline Params ---
 param(
@@ -29,7 +30,9 @@ param(
 );
 
 # Include Files --------
-. "GitHelpers.ps1";
+. "$PSScriptRoot/lib/GitHelpers.ps1";
+
+$remote = "origin";
 
 # Our code -------------
 [string] $branchName = GitCurrentBranch;
@@ -45,31 +48,46 @@ GitCheckout($branch);
 $branchName = GitCurrentBranch;
 if ($branchName.Trim() -eq $branch.Trim())
 {
-  Write-Host "DevOps: Switched to $branch." -ForegroundColor Green;
+  Write-Host "DevOps: Switched to $branch locally." -ForegroundColor Green;
   exit;
 }
 
 # TODO - If optional remote provided, use it first
 # .. here ..
 
-# Attempt to get it from origin
-Invoke-Expression "git checkout -b $branch remotes/origin/$branch";
+## TODO:
+##  1. Check if branch exists remotely first
+##  2. If does not exist, fetch
+##  3. If does not exist, create a new one
+
+# Attempt to get it from remote repository
+Write-Host "DevOps: Branch does not exist locally." -ForegroundColor Yellow;
+Write-Host "DevOps: Checking for branch on remote, ""$remote""..." -ForegroundColor Yellow;
+
+# -b or not to -b ??
+Invoke-Expression "git checkout ""$branch"" ""remotes/$remote/$branch""";
 $branchName = GitCurrentBranch;
 
 if ($branchName.Trim() -eq $branch.Trim())
 {
-  Write-Host "DevOps: Switched to $branch from remote." -ForegroundColor Green;
+  Write-Host "DevOps: Switched to '$branch' from remote." -ForegroundColor Green;
   exit;
 }
 
-# Fetch and try again from origin
+# Fetch and try again from remote repository
+Write-Host "DevOps: Branch not found on remote." -ForegroundColor Yellow;
+Write-Host "DevOps: Fetching latest..." -ForegroundColor Yellow;
 GitFetch;
 
-Invoke-Expression "git checkout -b $branch remotes/origin/$branch";
+Invoke-Expression "git checkout -b ""$branch"" ""remotes/$remote/$branch""";
 $branchName = GitCurrentBranch;
 
 if ($branchName.Trim() -eq $branch.Trim())
 {
-  Write-Host "DevOps: Switched to $branch from remote after 'fetch'." -ForegroundColor Green;
-  exit;
+  Write-Host "DevOps: Switched to '$branch' from remote after 'fetch'." -ForegroundColor Green;
+}
+else
+{
+  Write-Host "DevOps: The branch, ""$branch"" could not be found on ""$remote""." -ForegroundColor Red;
+  Write-Host "DevOps: Check that the spelling and remote are correct, or create a new branch." -ForegroundColor Yellow; 
 }
