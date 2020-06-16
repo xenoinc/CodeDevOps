@@ -20,8 +20,8 @@
     2020-01-08  0.1 - Created
     2020-05-05  0.2 - Updated error messages
 #>
-
 # git checkout -b feature-MyBranch remotes/origin/feature-MyBranch --
+
 
 # Commandline Params ---
 param(
@@ -88,6 +88,6 @@ if ($branchName.Trim() -eq $branch.Trim())
 }
 else
 {
-  Write-Host "DevOps: The branch, ""$branch"" could not be found on ""$remote""." - ForegroundColor Yellow;
-  Write-Host "DevOps: Check that the spelling and remote are correct, or create a new branch." - ForegroundColor Yellow; 
+  Write-Host "DevOps: The branch, ""$branch"" could not be found on ""$remote""." -ForegroundColor Red;
+  Write-Host "DevOps: Check that the spelling and remote are correct, or create a new branch." -ForegroundColor Yellow; 
 }
