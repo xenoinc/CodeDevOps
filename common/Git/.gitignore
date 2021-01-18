@@ -1,4 +1,4 @@
-# Copyright 2018 Xeno Innovations, Inc
+# Copyright 2013-2021 Xeno Innovations, Inc
 
 # Generic files
 *.bak
@@ -76,4 +76,4 @@ TestResult.xml
 /docs/*.csv
 /docs/backup
 /tests
-
+/tools

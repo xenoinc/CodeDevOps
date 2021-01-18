@@ -23,102 +23,76 @@ param(
 #  # ,[parameter(Mandatory=$false)][switch] $track = $false
 );
 
-# Base folder paths
-[string]$Global:_baseStyleCop = "https://raw.githubusercontent.com/xenoinc/XenoDevOps/master/stylecop/";
+# Include Files --------
+. "$PSScriptRoot/lib/DevOpsHelpers.ps1";
 
-#region Methods
+### Write-Output $("path " + GetSourceFolder);
+##$srcFolder = GetSourceFolder;
+##if ($srcFolder -eq [String]::Empty)
+##{
+##  Write-Output "Missing 'source' or 'src' folder. Make sure you're in project root.";
+##  exit;
+##}
 
-function DownloadFile([string] $url, [string] $output)
+function DisplayHelp()
 {
-  $startTime = Get-Date;
-  (New-Object System.Net.WebClient).DownloadFileAsync($url, $output);
-  Write-Output "Time taken: $((Get-Date).Subtract($startTime).Seconds) second(s)";
-}
-
-function DownloadTest()
-{
-  <#
-  $urlTest = "https://raw.githubusercontent.com/xenoinc/XenoDevOps/master/stylecop/stylecop.ruleset";
-  $output = "$PSScriptRoot\test.xml";
-  $startTime = Get-Date;
-
-  #$wc = New-Object System.Net.WebClient;
-  #$wc.DownloadFile($urlTest, $output);
-  # (New-Object System.Net.WebClient).DownloadFile($urlTest, $output);
-  (New-Object System.Net.WebClient).DownloadFileAsync($urlTest, $output);
-
-  Write-Output "Time taken: $((Get-Date).Subtract($startTime).Seconds) second(s)";
-  #>
-  Write-Output "Code removed for testing only";
-}
-
-function CachePath($file)
-{
-  # DevOps cached folder ("C:\BuildTools\tmp\" + file)
-  return "$PSScriptRoot/tmp/${file}";
-}
-
-function GetStyleCop()
-{
-  $file = "stylecop.ruleset";
-  $output = Join-Path -Path "$pwd" -ChildPath $file;
-  DownloadFile($Global:_baseStyleCop + $file)($output);
-
-
-  $file = "stylecop.json";
-  $output = Join-Path -Path "$pwd" -ChildPath $file;
-  DownloadFile($Global:_baseStyleCop + $file)($output);
-}
-
-# Returns path to 'source' or 'src' folder
-# If it doesn't exist, it will return string.empty
-function GetSourceFolder()
-{
-  Write-Output "Entering GetSourceFolder()...";
-
-  [string]$path;
-  $path = Join-Path -Path "$pwd" -ChildPath "source";
-  Write-Output "Testing '${path}'";
-  if ([System.IO.Directory]::Exists($path))
-  {
-    return $path;
-  }
-
-  $path = Join-Path -Path "$pwd" -ChildPath "src";
-  Write-Output "Testing '${path}'";
-  if ([System.IO.Directory]::Exists($path))
-  {
-    return $path;
-  }
-
-  Write-Output "Exiting GetSourceFolder()...";
-  return [String]::Empty;
-}
-
-#endregion Methods
-
-# Write-Output $("path " + GetSourceFolder);
-$srcFolder = GetSourceFolder;
-if ($srcFolder -eq [String]::Empty)
-{
-  Write-Output "Missing 'source' or 'src' folder. Make sure you're in project root.";
-  exit;
-}
-
-# Make sure we got a command
-if ($get.Trim() -eq [String]::Empty)
-{
-  Write-Output "Nothing to do. Try typing, 'DevOps -get StyleCop' from project root folder";
-  exit;
+  Write-Output "Invalid DevOps -get command, '$get'";
+  # Write-Output "Current Path:   '$pwd'";
+  # Write-Output "Script Root:    '$PSScriptRoot'";
+  Write-Output "";
+  Write-Output "Usage:";
+  Write-Output "  DevOps -get <OPTION>";
+  Write-Output "  * This will update your project file(s) for the provided Option switch";
+  Write-Output "";
+  Write-Output "Options:";
+  Write-Output "  ALL           - Updates all files except GitIgnore";
+  Write-Output "  CodeMaid";
+  Write-Output "  EditorConfig";
+  Write-Output "  GitIgnore";
+  Write-Output "  LicenseHeader";
+  Write-Output "  SpellChecker";
+  Write-Output "  StyleCop";
+  Write-Output "  XamlStyler";
 }
 
 # Parse commands
 $get = $get.Trim();
-if ($get.ToLower() -eq "StyleCop".ToLower())
+
+switch -Exact ($get.ToLower())
 {
-  GetStyleCop;
-}
-else
-{
-  Write-Output "Unknown GET command; exiting";
+  # "StyleCop".ToLower() { GetStyleCop; break; }
+  "all".ToLower()
+  {
+    Write-Output "** Updating All **";
+    CopyCommonFile("CodeMaid/CodeMaid.config")($pwd);
+    CopyCommonFile("EditorConfig/.editorconfig")($pwd);
+    CopyCommonFile("LicenseHeader/.licenseheader")($pwd);
+    CopyCommonFile("SpellChecker/SpellChecker.ruleset")($pwd);
+    CopyCommonFile("SpellChecker/.vsspell")($pwd);
+    CopyCommonFile("StyleCop/stylecop.ruleset")($pwd);
+    CopyCommonFile("StyleCop/stylecop.json")($pwd);
+    CopyCommonFile("XamlStyler/Settings.XamlStyler")($pwd);
+    break;
+  }
+
+  "CodeMaid".ToLower()      { CopyCommonFile("CodeMaid/CodeMaid.config")($pwd); break; }
+  "EditorConfig".ToLower()  { CopyCommonFile("EditorConfig/.editorconfig")($pwd); break; }
+  "GitIgnore".ToLower()     { CopyCommonFile("Git/.gitignore")($pwd); break; }
+  "LicenseHeader".ToLower() { CopyCommonFile("LicenseHeader/.licenseheader")($pwd); break; }
+  "SpellChecker".ToLower()
+  {
+    CopyCommonFile("SpellChecker/SpellChecker.ruleset")($pwd);
+    CopyCommonFile("SpellChecker/.vsspell")($pwd);
+    break;
+  }
+  "StyleCop".ToLower()
+  {
+    CopyCommonFile("StyleCop/stylecop.ruleset")($pwd);
+    CopyCommonFile("StyleCop/stylecop.json")($pwd);
+    break;
+  }
+  "XamlStyler".ToLower() { CopyCommonFile("XamlStyler/Settings.XamlStyler")($pwd); break; }
+  default {
+    DisplayHelp;
+  }
 }
