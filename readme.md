@@ -17,6 +17,29 @@ This project started as an internal tool used by Xeno Innovations - hence the fo
 * Create new project folder template
     * Makes standard folder structure, readme, MSBuild, rules, etc.
 
+```
+                      `.---.`             ``.---.
+                 `:ohmmNNNNNmho.     `-+osysoo+oyh:
+               .ohyo/:---:+ymNNm+ `/shy+:.`     .dm`
+             `+h+-`         .+dNNhhs:.          /Nm.
+            `ys-             `sNNd.           `oNNo`
+           `y+`             /hsdNh`         `+dNd+`
+           os`            .hh:`yNo       `:ymNh+.
+          .h-            /ms. `dd-  `./ohmdy+-`
+          :y`        ```+Nh:-:oNhosyyys+/-`
+         `+h/+oo-..    ydNmysosms:-..`
+     `:osyhd+/::--...`.dNo` :d/`         .`
+   `+hs:-`-h`         /NN+`oh:           s:
+  `yd:`   `+`         sNNhhs-           `d-
+  /Ns                 oNNm/`            oy`
+  +Nm/`            `-ohmNNh.          `oh-
+  -hNNdo:.`````.:+ydy/.:dNNNs-`     `/yo.
+   .smNNNNNNNNNNmy+-`   .smNNNNdhyyhh+-
+     `:+ossso+:-`         `:+syyyo/-`
+
+  -- Xeno Innovations --
+```
+
 # Using DevOps Git Commands
 The base library for all Git commands.
 
