@@ -1,0 +1,3 @@
+[submodule "common/Xeno.Prism.Template"]
+	path = common/Xeno.Prism.Template
+	url = https://github.com/xenoinc/XenoXamarinTemplates

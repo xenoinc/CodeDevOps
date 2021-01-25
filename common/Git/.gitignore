@@ -1,4 +1,4 @@
-# Copyright 2013-2021 Xeno Innovations, Inc
+# Copyright 2021 Xeno Innovations, Inc
 
 # Generic files
 *.bak
@@ -70,9 +70,7 @@ TestResult.xml
 /output/*
 !/output/readme.txt
 
-
 ## USER DEFINED
-
 /docs/*.csv
 /docs/backup
 /tests
