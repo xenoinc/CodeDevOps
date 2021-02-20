@@ -18,6 +18,7 @@
 #>
 
 param(
+  [parameter(Mandatory=$false)][string] $help ="",
   [parameter(Mandatory=$false)][string] $get = ""
 #  , [parameter(Mandatory=$false)][bool] $GetFramework
 #  # ,[parameter(Mandatory=$false)][switch] $track = $false
@@ -36,13 +37,15 @@ param(
 
 function DisplayHelp()
 {
-  Write-Output "Invalid DevOps -get command, '$get'";
   # Write-Output "Current Path:   '$pwd'";
   # Write-Output "Script Root:    '$PSScriptRoot'";
   Write-Output "";
   Write-Output "Usage:";
-  Write-Output "  DevOps -get <OPTION>";
-  Write-Output "  * This will update your project file(s) for the provided Option switch";
+  Write-Output "  DevOps /help             - Help documentation";
+  Write-Output "";
+  Write-Output "  DevOps /get <OPTION>     - Get project core file(s)";
+  Write-Output "  * This will copy the specified project file(s) into your current folder";
+  Write-Output "    for the provided Option switch";
   Write-Output "";
   Write-Output "Options:";
   Write-Output "  ALL           - Updates all files except GitIgnore";
@@ -53,6 +56,12 @@ function DisplayHelp()
   Write-Output "  SpellChecker";
   Write-Output "  StyleCop";
   Write-Output "  XamlStyler";
+}
+
+if ($PSBoundParameters.ContainsKey('help') -eq $true)
+{
+  DisplayHelp;
+  exit;
 }
 
 # Parse commands
@@ -92,7 +101,9 @@ switch -Exact ($get.ToLower())
     break;
   }
   "XamlStyler".ToLower() { CopyCommonFile("XamlStyler/Settings.XamlStyler")($pwd); break; }
-  default {
+  default
+  {
+    Write-Output "Invalid DevOps -get command, '$get'";
     DisplayHelp;
   }
 }
