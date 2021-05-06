@@ -42,10 +42,10 @@ function DisplayHelp()
   Write-Output "";
   Write-Output "Usage:";
   Write-Output "  DevOps /help             - Help documentation";
+  Write-Output "  DevOps -get <OPTION>     - Imports core project file(s) for option";
   Write-Output "";
-  Write-Output "  DevOps /get <OPTION>     - Get project core file(s)";
-  Write-Output "  * This will copy the specified project file(s) into your current folder";
-  Write-Output "    for the provided Option switch";
+  Write-Output "Sample:";
+  Write-Output "  DevOps -get gitignore    - Imports .GitIgnore file to current directory";
   Write-Output "";
   Write-Output "Options:";
   Write-Output "  ALL           - Updates all files except GitIgnore";
