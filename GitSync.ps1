@@ -46,21 +46,31 @@ if ($branch -eq "")
   exit;
 }
 
-$syncBranch = "develop";
+# $syncBranch = "develop";
+$betaTest = true;
 
-Write-Host "Switching to ${syncBranch}..." -ForegroundColor Yellow;
-GitCheckout($syncBranch);
+if ($betaTest)
+{
+  Invoke-Expression "git fetch";
+  Invoke-Expression "git fetch origin ${syncBranch}:${syncBranch}";
+  Invoke-Expression "git merge ${syncBranch}";
+}
+else
+{
+  Write-Host "Switching to ${syncBranch}..." -ForegroundColor Yellow;
+  GitCheckout($syncBranch);
 
-Write-Host "Pulling latest..." -ForegroundColor Yellow;
-GitPull($remote)($syncBranch);
+  Write-Host "Pulling latest..." -ForegroundColor Yellow;
+  GitPull($remote)($syncBranch);
 
-Write-Host "Switching back to ${branch}..." -ForegroundColor Yellow;
-GitCheckout($branch);
+  Write-Host "Switching back to ${branch}..." -ForegroundColor Yellow;
+  GitCheckout($branch);
 
-Write-Host "Merging branches..." -ForegroundColor Yellow;
-GitMerge($syncBranch);
+  Write-Host "Merging branches..." -ForegroundColor Yellow;
+  GitMerge($syncBranch);
 
-Write-Host "Sync with '${syncBranch}' complete!" -ForegroundColor Green;
+  Write-Host "Sync with '${syncBranch}' complete!" -ForegroundColor Green;
+}
 
 # Automatically PUSH branch upstream via "-push" switch
 if ($push)
