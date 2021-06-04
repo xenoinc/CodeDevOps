@@ -8,3 +8,5 @@
 
 # Local only
 ud-local.bat
+sandbox/FixTools.bat
+sandbox/_BuildToolsFixed.zip
