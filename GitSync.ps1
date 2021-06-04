@@ -21,7 +21,8 @@
 param(
   [parameter(Mandatory=$false)][switch] $push = $false,
   [parameter(Mandatory=$false)][string] $syncBranch = "develop",
-  [parameter(Mandatory=$false)][string] $remote = "origin"
+  [parameter(Mandatory=$false)][string] $remote = "origin",
+  [parameter(Mandatory=$false)][bool] $useCheckout = $false
 );
 
 # Clear out cache of previous PowerShell sessions
@@ -34,9 +35,6 @@ param(
 . "$PSScriptRoot/lib/GitHelpers.ps1";
 
 # Our code -------------
-Write-Host "------------------------------" -ForegroundColor Yellow;
-Write-Host "Syncing with develop branch..." -ForegroundColor Yellow;
-
 $branch = GitCurrentBranch;
 $branch = $branch.Trim();
 
@@ -46,28 +44,44 @@ if ($branch -eq "")
   exit;
 }
 
-$syncBranch = "develop";
+$stopWatch = New-Object System.Diagnostics.Stopwatch
+$stopWatch.Start()
 
-Write-Host "Switching to ${syncBranch}..." -ForegroundColor Yellow;
-GitCheckout($syncBranch);
+Write-Host "------------------------------" -ForegroundColor Yellow;
+Write-Host "Syncing '${branch}' with '${syncBranch}' branch..." -ForegroundColor Yellow;
 
-Write-Host "Pulling latest..." -ForegroundColor Yellow;
-GitPull($remote)($syncBranch);
+if ($useCheckout -eq $false)
+{
+  Write-Host "Fetching latest branch, '${syncBranch}'..." -ForegroundColor Yellow;
+  Invoke-Expression "git fetch";
+  Invoke-Expression "git fetch ${remote} ${syncBranch}:${syncBranch}";
 
-Write-Host "Switching back to ${branch}..." -ForegroundColor Yellow;
-GitCheckout($branch);
+  Write-Host "Merging '${syncBranch}' with '${branch}'..." -ForegroundColor Yellow;
+  Invoke-Expression "git merge ${syncBranch}";
+}
+else
+{
+  Write-Host "Switching to ${syncBranch}..." -ForegroundColor Yellow;
+  GitCheckout($syncBranch);
 
-Write-Host "Merging branches..." -ForegroundColor Yellow;
-GitMerge($syncBranch);
+  Write-Host "Pulling latest..." -ForegroundColor Yellow;
+  GitPull($remote)($syncBranch);
 
-Write-Host "Sync with '${syncBranch}' complete!" -ForegroundColor Green;
+  Write-Host "Switching back to ${branch}..." -ForegroundColor Yellow;
+  GitCheckout($branch);
+
+  Write-Host "Merging branches..." -ForegroundColor Yellow;
+  GitMerge($syncBranch);
+}
 
 # Automatically PUSH branch upstream via "-push" switch
 if ($push)
 {
   Write-Host "Pushing updated branch..." -ForegroundColor Green;
-  GitPush("origin")($branch);
+  GitPush($remote)($branch);
 }
 
-Write-Host "Current Branch: $branch" -ForegroundColor Yellow;
+$stopWatch.Stop();
+Write-Host "Sync with '${syncBranch}' complete!" -ForegroundColor Green;
+Write-Host "Elapsed Time: " $stopWatch.Elapsed -ForegroundColor Green;
 Write-Host "";
