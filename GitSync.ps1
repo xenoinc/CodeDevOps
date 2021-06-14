@@ -52,8 +52,10 @@ Write-Host "Syncing '${branch}' with '${syncBranch}' branch..." -ForegroundColor
 
 if ($useCheckout -eq $false)
 {
-  Write-Host "Fetching latest branch, '${syncBranch}'..." -ForegroundColor Yellow;
+  Write-Host "Fetching latest..." -ForegroundColor Yellow;
   Invoke-Expression "git fetch";
+  
+  Write-Host "Fetching latest branch, '${syncBranch}'..." -ForegroundColor Yellow;
   Invoke-Expression "git fetch ${remote} ${syncBranch}:${syncBranch}";
 
   Write-Host "Merging '${syncBranch}' with '${branch}'..." -ForegroundColor Yellow;
