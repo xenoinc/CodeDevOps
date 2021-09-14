@@ -5,6 +5,7 @@
 # keep your own personal defaults for others
 #
 # Revision Log
+# 5a  2021-09-14 - Added PowerShell and Markdown rules
 # 5   2021-08-26 - C# StyleCop rules
 # 4a  2021-01-17 - C# StyleCop rules
 # 4   2020-05-10 - C# coding standards
@@ -210,4 +211,16 @@ trim_trailing_whitespace = true
 [*.{yaml,yml}]
 indent_style = space
 indent_size = 2
+trim_trailing_whitespace = true
+
+# Powershell
+[*.{ps1,psd1,psm1}]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = true
+
+[*.md]
+indent_style = space
+indent_size = 2
+insert_final_newline = true
 trim_trailing_whitespace = true
