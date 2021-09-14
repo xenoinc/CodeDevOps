@@ -1,8 +1,12 @@
 # PowerShell DevOps
 
-Development Operations for command line productivity using PowerShell.
+Xeno DevOps (Development Operations) command line tool provides users a quick-set of **Git command helpers** and **project configs** to increase your productivity via PowerShell.
 
-Xeno DevOps provides command line helpers for Git and project configurations - _focusing on C# styling rules_.
+The **Git helpers** provide shortcuts for popupular commands such as, `gitpull`, `gitpush`, `gitcommit`, so you don't have to remember switches. Also provides, `gitsync`, which syncronizes your current branch with `develop` (by default) or a branch of our choosing.
+
+The `devops` command provides project configurations to ensure all projects stay aligned with the same ruleset.
+
+Since our primar focus is on projects made with Visual Studio and VS Code, the rulesets cover a wide range of C# for Xamarin/MAUI, desktop and ASP.NET Core, as well as C/C++ (including Arduino).
 
 This project started as an internal tool used by Xeno Innovations - hence the focus on git and the default ``develop`` branch. We'll do our best to keep things generic for the open source community.
 
@@ -43,10 +47,6 @@ This project started as an internal tool used by Xeno Innovations - hence the fo
 
   -- Xeno Innovations --
 ```
-
-# Using DevOps Git Commands
-
-The base library for all Git commands.
 
 ## [GitSync](https://github.com/xenoinc/XenoDevOps/wiki/GitSync)
 
