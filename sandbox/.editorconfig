@@ -150,15 +150,20 @@ dotnet_diagnostic.SA1633.severity = silent
 # SA1201: Elements should appear in the correct order
 dotnet_diagnostic.SA1201.severity = error
 
-# SA1600: Elements should be documented
-dotnet_diagnostic.SA1600.severity = none
+# SA1503: Braces should not be omitted
+dotnet_diagnostic.SA1503.severity = none
 
 # SA1507: Code should not contain multiple blank lines in a row
 dotnet_diagnostic.SA1507.severity = error
 
+# SA1516: Elements should be separated by blank line
+dotnet_diagnostic.SA1516.severity = error
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = none
+
 # Default severity for analyzer diagnostics with category 'StyleCop.CSharp.SpacingRules'
 dotnet_analyzer_diagnostic.category-StyleCop.CSharp.SpacingRules.severity = error
-
 
 [*.{c,cpp,h}]
 indent_style = space
@@ -206,12 +211,3 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 trim_trailing_whitespace = true
-
-# SA1503: Braces should not be omitted
-dotnet_diagnostic.SA1503.severity = none
-
-# SA1201: Elements should appear in the correct order
-dotnet_diagnostic.SA1201.severity = error
-
-# SA1516: Elements should be separated by blank line
-dotnet_diagnostic.SA1516.severity = error
