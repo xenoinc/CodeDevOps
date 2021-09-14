@@ -5,10 +5,11 @@
 # keep your own personal defaults for others
 #
 # Revision Log
-# 3   2017-07-31 - Basic
-# 3b  2019-03-24 - Included additional rules
-# 3c  2020-04-18 - Split file filters into their own sections
+# 4a  2021-01-17 - C# StyleCop rules
 # 4   2020-05-10 - C# coding standards
+# 3c  2020-04-18 - Split file filters into their own sections
+# 3b  2019-03-24 - Included additional rules
+# 3   2017-07-31 - Basic
 #
 # References:
 #   - https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference?view=vs-2019
@@ -22,7 +23,6 @@ root = true
 # All generic files should use MSDOS style endings, not Unix (lf)
 [*]
 end_of_line = crlf
-trim_trailing_whitespace = true
 
 # C# Files
 [*.cs]
@@ -66,10 +66,10 @@ csharp_space_after_cast = false
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
 
-## CA1031: Do not catch general exception types
-dotnet_diagnostic.CA1031.severity = none
-
 ## Naming Conventions
+
+### Alt to LicenseHeader extension
+# file_header_template = Copyright Xeno Innovations, Inc. 2020
 
 ### Async methods should have "Async" suffix
 dotnet_naming_rule.async_methods_end_in_async.symbols = any_async_methods
@@ -100,7 +100,13 @@ dotnet_naming_style.begins_with_i.required_prefix = I
 dotnet_naming_style.begins_with_i.required_suffix =
 dotnet_naming_style.begins_with_i.word_separator =
 
-# 2-column space/tab indentation
+# StyleCop.Analyzers
+## CA1031: Do not catch general exception types
+dotnet_diagnostic.CA1031.severity = none
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = silent
+
 [*.{c,cpp,h}]
 indent_style = space
 indent_size = 2
