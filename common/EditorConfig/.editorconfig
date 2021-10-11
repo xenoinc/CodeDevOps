@@ -5,7 +5,8 @@
 # keep your own personal defaults for others
 #
 # Revision Log
-# 5a  2021-09-14 - Added PowerShell and Markdown rules
+# 5.2 2021-10-11 - Uniform C# spacing rules and labeled code formatting rules
+# 5.1 2021-09-14 - Added PowerShell and Markdown rules
 # 5   2021-08-26 - C# StyleCop rules
 # 4a  2021-01-17 - C# StyleCop rules
 # 4   2020-05-10 - C# coding standards
@@ -56,22 +57,14 @@ csharp_new_line_between_query_expression_clauses = true
 
 ## Spaces
 csharp_space_after_cast = false
-## #require a space before the colon for bases or interfaces in a type declaration
-## csharp_space_after_colon_in_inheritance_clause = true
-## #require a space after a keyword in a control flow statement such as a for loop
-## csharp_space_after_keywords_in_control_flow_statements = true
-## #require a space before the colon for bases or interfaces in a type declaration
-## csharp_space_before_colon_in_inheritance_clause = true
-## #remove space within empty argument list parentheses
-## csharp_space_between_method_call_empty_parameter_list_parentheses = false
-## #remove space between method call name and opening parenthesis
-## csharp_space_between_method_call_name_and_opening_parenthesis = false
-## #do not place space characters after the opening parenthesis and before the closing parenthesis of a method call
-## csharp_space_between_method_call_parameter_list_parentheses = false
-## #remove space within empty parameter list parentheses for a method declaration
-## csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
-## #place a space character after the opening parenthesis and before the closing parenthesis of a method declaration parameter list.
-## csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
+csharp_space_between_method_declaration_parameter_list_parentheses = false
 
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
@@ -124,7 +117,6 @@ dotnet_naming_style.begins_with_i.required_prefix = I
 dotnet_naming_style.begins_with_i.required_suffix =
 dotnet_naming_style.begins_with_i.word_separator =
 
-
 # Code analysis rules
 # IDE0058: Expression value is never used
 dotnet_diagnostic.IDE0058.severity = none
@@ -135,33 +127,33 @@ dotnet_diagnostic.IDE0046.severity = none
 # IDE0010: Add missing cases
 dotnet_diagnostic.IDE0010.severity = none
 
-# StyleCop.Analyzers
-## CA1031: Do not catch general exception types
+## Code Analysis Rules
+# CA1031: Do not catch general exception types
 dotnet_diagnostic.CA1031.severity = none
 
+## Compiler
 # CS1591: Missing XML comment for publicly visible type or member
 dotnet_diagnostic.CS1591.severity = silent
 
+## StyleCop.Analyzers
+# SA1101: PrefixLocalCallsWithThis
 dotnet_diagnostic.SA1101.severity = silent
+# SA1200: UsingDirectivesMustBePlacedWithinNamespace
 dotnet_diagnostic.SA1200.severity = silent
-dotnet_diagnostic.SA1309.severity = none
-dotnet_diagnostic.SA1503.severity = silent
-dotnet_diagnostic.SA1633.severity = silent
-
 # SA1201: Elements should appear in the correct order
 dotnet_diagnostic.SA1201.severity = error
-
+# SA1309: FieldNamesMustNotBeginWithUnderscore
+dotnet_diagnostic.SA1309.severity = none
 # SA1503: Braces should not be omitted
 dotnet_diagnostic.SA1503.severity = none
-
 # SA1507: Code should not contain multiple blank lines in a row
 dotnet_diagnostic.SA1507.severity = error
-
 # SA1516: Elements should be separated by blank line
 dotnet_diagnostic.SA1516.severity = error
-
 # SA1600: Elements should be documented
 dotnet_diagnostic.SA1600.severity = none
+# SA1633: FileMustHaveHeader
+dotnet_diagnostic.SA1633.severity = silent
 
 # Default severity for analyzer diagnostics with category 'StyleCop.CSharp.SpacingRules'
 dotnet_analyzer_diagnostic.category-StyleCop.CSharp.SpacingRules.severity = error
