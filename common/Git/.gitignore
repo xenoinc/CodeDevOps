@@ -19,6 +19,7 @@
 *.userosscache
 *.sln.docstates
 *.autorecover
+*.coverage
 
 ## All test SQLite datbases
 *.db3
