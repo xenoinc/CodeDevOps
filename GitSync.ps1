@@ -1,7 +1,7 @@
 <#
   Git commandline helpers for PowerShell
   Author: Damian Suess
-  Revision: 2 - 2018-07-30 (2018-10-03)
+  Revision: 3 - 2021-10-11
 
   Usage:
     GitSync         ; Sync current branch with develop
@@ -9,19 +9,21 @@
 
   TODO:
     - GitCheckIn $message (check-in/push)
+    - Option "-force" to merge unrelated histories
     - Option "-track" to set tracking; don't track by default
-    - Option "-u" "-uh" to merge unrelated histories
 
   Change Log:
-  2018-10-03  0.2 - Some enhancements
-  2018-07-30  0.1 - Created
+  2021-10-11  r3 - Merge unrelated histories
+  2018-10-03  r2 - Some enhancements
+  2018-07-30  r1 - Created
 #>
 
 # Commandline Params ---
 param(
-  [parameter(Mandatory=$false)][switch] $push = $false,
   [parameter(Mandatory=$false)][string] $syncBranch = "develop",
   [parameter(Mandatory=$false)][string] $remote = "origin",
+  [parameter(Mandatory=$false)][switch] $push = $false,
+  [parameter(Mandatory=$false)][switch] $force = $false,
   [parameter(Mandatory=$false)][bool] $useCheckout = $false
 );
 
@@ -35,10 +37,10 @@ param(
 . "$PSScriptRoot/lib/GitHelpers.ps1";
 
 # Our code -------------
-$branch = GitCurrentBranch;
-$branch = $branch.Trim();
+$current = GitCurrentBranch;
+$current = $current.Trim();
 
-if ($branch -eq "")
+if ($current -eq "")
 {
   Write-Host "No repository found in currect directory." -ForegroundColor Red;
   exit;
@@ -48,7 +50,7 @@ $stopWatch = New-Object System.Diagnostics.Stopwatch
 $stopWatch.Start()
 
 Write-Host "------------------------------" -ForegroundColor Yellow;
-Write-Host "Syncing '${branch}' with '${syncBranch}' branch..." -ForegroundColor Yellow;
+Write-Host "Syncing '${current}' with '${syncBranch}' branch..." -ForegroundColor Yellow;
 
 if ($useCheckout -eq $false)
 {
@@ -58,8 +60,8 @@ if ($useCheckout -eq $false)
   Write-Host "Fetching latest branch, '${syncBranch}'..." -ForegroundColor Yellow;
   Invoke-Expression "git fetch ${remote} ${syncBranch}:${syncBranch}";
 
-  Write-Host "Merging '${syncBranch}' with '${branch}'..." -ForegroundColor Yellow;
-  Invoke-Expression "git merge ${syncBranch}";
+  Write-Host "Merging '${syncBranch}' with '${current}'..." -ForegroundColor Yellow;
+  GitMerge($syncBranch);
 }
 else
 {
@@ -69,8 +71,8 @@ else
   Write-Host "Pulling latest..." -ForegroundColor Yellow;
   GitPull($remote)($syncBranch);
 
-  Write-Host "Switching back to ${branch}..." -ForegroundColor Yellow;
-  GitCheckout($branch);
+  Write-Host "Switching back to ${current}..." -ForegroundColor Yellow;
+  GitCheckout($current);
 
   Write-Host "Merging branches..." -ForegroundColor Yellow;
   GitMerge($syncBranch);
@@ -80,7 +82,7 @@ else
 if ($push)
 {
   Write-Host "Pushing updated branch..." -ForegroundColor Green;
-  GitPush($remote)($branch);
+  GitPush($remote)($current);
 }
 
 $stopWatch.Stop();
