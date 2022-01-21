@@ -76,7 +76,7 @@ Currently not stable, do not use this function yet.
 #>
 function GetStyleCop()
 {
-  $file = "stylecop.ruleset";
+  $file = "StyleCop.Analyzers.ruleset";
   $output = Join-Path -Path "$pwd" -ChildPath $file;
   DownloadFile($Global:_baseStyleCop + $file)($output);
 

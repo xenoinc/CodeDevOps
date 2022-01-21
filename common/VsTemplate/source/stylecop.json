@@ -17,11 +17,6 @@
       "systemUsingDirectivesFirst": true,
       "usingDirectivesPlacement": "outsideNamespace"
     },
-    "indentation": {
-      "indentationSize": 2,
-      "tabSize": 2,
-      "useTabs": false
-    },
     "layoutRules": {
       "allowConsecutiveUsings": false,
       "newlineAtEndOfFile": "allow"

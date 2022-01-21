@@ -78,7 +78,7 @@ switch -Exact ($get.ToLower())
     CopyCommonFile("LicenseHeader/.licenseheader")($pwd);
     CopyCommonFile("SpellChecker/SpellChecker.ruleset")($pwd);
     CopyCommonFile("SpellChecker/.vsspell")($pwd);
-    CopyCommonFile("StyleCop/stylecop.ruleset")($pwd);
+    CopyCommonFile("StyleCop/StyleCop.Analyzers.ruleset")($pwd);
     CopyCommonFile("StyleCop/stylecop.json")($pwd);
     CopyCommonFile("XamlStyler/Settings.XamlStyler")($pwd);
     break;
@@ -96,7 +96,7 @@ switch -Exact ($get.ToLower())
   }
   "StyleCop".ToLower()
   {
-    CopyCommonFile("StyleCop/stylecop.ruleset")($pwd);
+    CopyCommonFile("StyleCop/StyleCop.Analyzers.ruleset")($pwd);
     CopyCommonFile("StyleCop/stylecop.json")($pwd);
     break;
   }
