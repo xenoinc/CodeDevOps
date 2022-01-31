@@ -244,12 +244,17 @@ dotnet_diagnostic.CA1031.severity = none
 dotnet_diagnostic.CA1507.severity = error
 
 ## Compiler
+# CS0618: Type or member is obsolete
+dotnet_diagnostic.CS0618.severity = error
+##dotnet_diagnostic.CS0618.severity = warning
 # CS1591: Missing XML comment for publicly visible type or member
 dotnet_diagnostic.CS1591.severity = silent
 
 ## StyleCop.Analyzers
 # SA1000: Keywords should be spaced correctly
 dotnet_diagnostic.SA1000.severity = error
+# SA1005: Single line comments should begin with single space
+dotnet_diagnostic.SA1005.severity = error
 # SA1101: PrefixLocalCallsWithThis
 dotnet_diagnostic.SA1101.severity = none
 # SA1116: Split parameters should start on line after declaration
