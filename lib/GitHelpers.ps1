@@ -89,6 +89,7 @@ function GitPrune([bool] $syncPrune)
       |% { $_.ToString().Trim() -split '\s+' | Select-Object -first 1 } `
       |% { git branch -D $_ }
 
+    ################
     # Alt Solutions:
     # 1. Use ``$list = git branch -a`` after a fetch with prune, and compare
     #    anything starting with "remotes/origin/" against those not starting
@@ -111,6 +112,68 @@ function GitPrune([bool] $syncPrune)
     ##    ``% { $_.toString().Split(" ")[0]}``  Get the branch name
     ##    ``% {git branch -d $_}``              Deletes the branch
     #
+  }
+}
+
+function GitPrune_Prototype([bool] $syncPrune)
+{
+  GitFetch($true);
+
+  if ($syncPrune -eq $true)
+  {
+    Write-Host "Syncing with server..." -ForegroundColor Blue;
+
+    [string[]] $list = git branch -a;
+
+    #$list2 = git branch -a
+    #Write-Prompt $list2.GetType().FullName;
+
+    [string] $curBranch = [String]::Empty;
+    [string] $branch = [String]::Empty;
+    $locals = New-Object System.Collections.ArrayList;
+    $remotes = New-Object System.Collections.ArrayList;
+    $whiteList = New-Object System.Collections.ArrayList;
+
+    [void]$whiteList.Add("master");
+    [void]$whiteList.Add("develop");
+
+    Write-Host "Starting...";
+
+    $list.ForEach({
+      $ndx = $_.Trim();
+
+      if ($ndx.SubString(0,1) -eq "*") {
+        $curBranch = $ndx.SubString(2);
+      }
+
+      [string[]] $elements = $ndx.Split("/");
+      if ($elements[0] -eq "remotes") {
+        $null, $null, $elements = $elements;
+        $branch = $elements -Join "/";
+        [void]$remotes.Add($branch);
+      }
+      else
+      {
+        if ($ndx.SubString(0, 1) -eq "*") {
+          $ndx = $ndx.SubString(2);
+        }
+        [void]$locals.Add($ndx);
+      }
+    });
+
+    Write-Host "Current branch: ${curBranch}";
+
+    $locals.ForEach({
+      #
+      # TODO: Add whitelist - i.e. master, develop
+      #
+      # Pre-check
+      if ($remotes.Contains($_) -eq $false -and $_ -eq $curBranch) {
+        Write-Host "WARNING: Current branch doesn't exist on remote anymore!" -ForegroundColor Red;
+      } elseif ($remotes.Contains($_) -eq $false -and $_ -ne $curBranch) {
+        Write-Host "DELETE ME: '$_'" -ForegroundColor Yellow;
+      }
+    });
   }
 }
 

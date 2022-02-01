@@ -30,7 +30,7 @@ BuildProperties.resx
 \source\codemaid.config
 \source\SOLUTION_NAME.sln.licenseheader
 \source\stylecop.json
-\source\stylecop.ruleset
+\source\StyleCop.Analyzers.ruleset
 ```
 
 ## StyleCop

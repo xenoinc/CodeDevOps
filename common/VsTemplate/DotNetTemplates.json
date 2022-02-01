@@ -14,7 +14,7 @@
     "Structure" :[
       {
         "/" : [".gitignore", "readme.md"],
-        "source/" : ["CodeMaid.config", ".editorconfig", "stylecop.json", "stylecop.ruleset", ".vsspell"]
+        "source/" : ["CodeMaid.config", ".editorconfig", "stylecop.json", "StyleCop.Analyzers.ruleset", ".vsspell"]
       }
     ]
   },
@@ -24,7 +24,7 @@
     "Structure" :[
       {
         "/" : [".gitignore", "readme.md", "build.proj", "BuildProperties.resx"],
-        "source/" : ["CodeMaid.config", ".editorconfig", "stylecop.json", "stylecop.ruleset", ".vsspell"],
+        "source/" : ["CodeMaid.config", ".editorconfig", "stylecop.json", "StyleCop.Analyzers.ruleset", ".vsspell"],
         "docs/" : ["readme.md"]
       }
     ]

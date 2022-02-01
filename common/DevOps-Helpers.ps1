@@ -31,7 +31,7 @@ function CachePath($file)
 
 function GetStyleCop()
 {
-  $file = "stylecop.ruleset";
+  $file = "StyleCop.Analyzers.ruleset";
   $output = Join-Path -Path "$pwd" -ChildPath $file;
   DownloadFile($Global:_baseStyleCop + $file)($output);
 
