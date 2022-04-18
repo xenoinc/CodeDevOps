@@ -1,8 +1,8 @@
 # Copyright 2022 Xeno Innovations, Inc.
+# https://github.com/xenoinc/CodeDevOps
 #
-# EditorConfig (http://EditorConfig.org)
-# This file provides formatting rules for the project so you can
-# keep your own personal defaults for others
+# This EditorConfig file provides consistant coding styles and formatting
+# structures for your team's projects while preserving your personal defaults.
 #
 # Revision Log
 # 6.1 2022-01-21 - Updated rules to include StyleCopAnalyzers. Added Static Readonly PascalCase from _camelCase.
@@ -22,7 +22,6 @@
 #   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules
 #   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/language-rules
 #   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules
-#   - https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-naming-conventions?view=vs-2019
 #   - https://github.com/dotnet/roslyn/blob/main/.editorconfig
 #   - https://github.com/microsoft/microsoft-ui-xaml/blob/master/.editorconfig
 #
@@ -100,7 +99,6 @@ indent_style = space
 indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
-
 
 # C# Files
 [*.{cs,csx}]
