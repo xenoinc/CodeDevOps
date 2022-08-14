@@ -1,6 +1,11 @@
 # Introduction
 This space maintains the standards for coding, development, operations, and scripts for Xeno Innovations' projects.
 
+## TODO
+
+* [ ] Remove `cache` folder, it is currently not being used.
+* [ ] Rename, `common` to `profiles`, `rules` or `rulesets`
+
 ## Folder Structure
 
 ## Style A - Base Folder
