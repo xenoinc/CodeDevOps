@@ -75,7 +75,9 @@ TestResult.xml
 **/.vscode/c_cpp_properties.json
 **/.vscode/launch.json
 **/.vscode/ipch
-
+## ESP-IDF
+sdkconfig.*
+!sdkconfig.default
 
 # Output
 !/[Oo]utput/readme.txt
