@@ -77,7 +77,8 @@ TestResult.xml
 **/.vscode/ipch
 ## ESP-IDF
 sdkconfig.*
-!sdkconfig.default
+!sdkconfig.defaults
+!sdkconfig.defaults.*
 
 # Output
 !/[Oo]utput/readme.txt
