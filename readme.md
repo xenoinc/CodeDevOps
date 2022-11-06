@@ -27,8 +27,7 @@ This project started as an internal tool used by Xeno Innovations - hence the fo
 
 ### TODO
 
-* [ ] Remove `cache` folder, it is currently not being used.
-* [ ] Rename, `common` to `profiles`, `rules` or `rulesets`
+* [ ] Rename `common` to `templates`
 
 ```text
                       `.---.`             ``.---.
