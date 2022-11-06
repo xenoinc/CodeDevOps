@@ -25,7 +25,11 @@ This project started as an internal tool used by Xeno Innovations - hence the fo
 * Create new project folder template
   * Makes standard folder structure, readme, MSBuild, rules, etc.
 
-```
+### TODO
+
+* [ ] Rename `common` to `templates`
+
+```text
                       `.---.`             ``.---.
                  `:ohmmNNNNNmho.     `-+osysoo+oyh:
                .ohyo/:---:+ymNNm+ `/shy+:.`     .dm`
