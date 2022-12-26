@@ -52,7 +52,8 @@ function DisplayHelp()
   Write-Output "  CodeMaid";
   Write-Output "  EditorConfig";
   Write-Output "  GitIgnore";
-  Write-Output "  LicenseHeader";
+  Write-Output "  LicenseHeader - License Header specifications";
+  Write-Output "  MD            - Markdown Lint";
   Write-Output "  SpellChecker";
   Write-Output "  StyleCop";
   Write-Output "  XamlStyler";
@@ -76,6 +77,7 @@ switch -Exact ($get.ToLower())
     CopyCommonFile("CodeMaid/CodeMaid.config")($pwd);
     CopyCommonFile("EditorConfig/.editorconfig")($pwd);
     CopyCommonFile("LicenseHeader/.licenseheader")($pwd);
+    CopyCommonFile("Markdown/.markdownlint.json")($pwd);
     CopyCommonFile("SpellChecker/SpellChecker.ruleset")($pwd);
     CopyCommonFile("SpellChecker/.vsspell")($pwd);
     CopyCommonFile("StyleCop/StyleCop.Analyzers.ruleset")($pwd);
@@ -88,6 +90,7 @@ switch -Exact ($get.ToLower())
   "EditorConfig".ToLower()  { CopyCommonFile("EditorConfig/.editorconfig")($pwd); break; }
   "GitIgnore".ToLower()     { CopyCommonFile("Git/.gitignore")($pwd); break; }
   "LicenseHeader".ToLower() { CopyCommonFile("LicenseHeader/.licenseheader")($pwd); break; }
+  "MD".ToLower()            { CopyCommonFile("Markdown/.markdownlint.json")($pwd); break; }
   "SpellChecker".ToLower()
   {
     CopyCommonFile("SpellChecker/SpellChecker.ruleset")($pwd);
