@@ -1,5 +1,5 @@
 [submodule "common/Xeno.Prism.Template"]
-	path = common/Xeno.Prism.Template
+	path = templates/Xeno.Prism.Template
 	url = https://github.com/xenoinc/XenoXamarinTemplates
 [submodule "lib/posh-git"]
 	path = lib/posh-git
