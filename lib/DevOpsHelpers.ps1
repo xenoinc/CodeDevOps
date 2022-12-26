@@ -45,23 +45,23 @@ function CachePath([string] $file)
 
 <#
 .SYNOPSIS
-Copy file from local common folder to specified path
+Copy file from local 'templates' folder to specified path
 
-.PARAMETER commonFolderFile
-Common Folder and File
+.PARAMETER srcFile
+Source template file or folder
 
 .PARAMETER dest
 Destination folder
 #>
-function CopyCommonFile([string] $commonFolderFile, [string] $dest)
+function CopyTemplate([string] $srcFile, [string] $dest)
 {
-  $from = "$PSScriptRoot/../common/${commonFolderFile}";
+  $from = "$PSScriptRoot/../templates/${srcFile}";
 
   if ([System.IO.File]::Exists($from)) {
     Copy-Item $from -Destination $dest
     Write-Output "Copied '${from}' -> '${dest}'";
   } else {
-    Write-Output "Missing DevOps Common file. DevOps 'Common' folder may be corrupt";
+    Write-Output "Missing DevOps template file. DevOps 'templates' folder may be missing or corrupt";
     Write-Output "- FROM: '${from}'";
     Write-Output "- TO:   '${dest}'";
   }

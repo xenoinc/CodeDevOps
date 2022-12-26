@@ -74,36 +74,36 @@ switch -Exact ($get.ToLower())
   "all".ToLower()
   {
     Write-Output "** Updating All **";
-    CopyCommonFile("CodeMaid/CodeMaid.config")($pwd);
-    CopyCommonFile("EditorConfig/.editorconfig")($pwd);
-    CopyCommonFile("LicenseHeader/.licenseheader")($pwd);
-    CopyCommonFile("Markdown/.markdownlint.json")($pwd);
-    CopyCommonFile("SpellChecker/SpellChecker.ruleset")($pwd);
-    CopyCommonFile("SpellChecker/.vsspell")($pwd);
-    CopyCommonFile("StyleCop/StyleCop.Analyzers.ruleset")($pwd);
-    CopyCommonFile("StyleCop/stylecop.json")($pwd);
-    CopyCommonFile("XamlStyler/Settings.XamlStyler")($pwd);
+    CopyTemplate("CodeMaid/CodeMaid.config")($pwd);
+    CopyTemplate("EditorConfig/.editorconfig")($pwd);
+    CopyTemplate("LicenseHeader/.licenseheader")($pwd);
+    CopyTemplate("Markdown/.markdownlint.json")($pwd);
+    CopyTemplate("SpellChecker/SpellChecker.ruleset")($pwd);
+    CopyTemplate("SpellChecker/.vsspell")($pwd);
+    CopyTemplate("StyleCop/StyleCop.Analyzers.ruleset")($pwd);
+    CopyTemplate("StyleCop/stylecop.json")($pwd);
+    CopyTemplate("XamlStyler/Settings.XamlStyler")($pwd);
     break;
   }
 
-  "CodeMaid".ToLower()      { CopyCommonFile("CodeMaid/CodeMaid.config")($pwd); break; }
-  "EditorConfig".ToLower()  { CopyCommonFile("EditorConfig/.editorconfig")($pwd); break; }
-  "GitIgnore".ToLower()     { CopyCommonFile("Git/.gitignore")($pwd); break; }
-  "LicenseHeader".ToLower() { CopyCommonFile("LicenseHeader/.licenseheader")($pwd); break; }
-  "MD".ToLower()            { CopyCommonFile("Markdown/.markdownlint.json")($pwd); break; }
+  "CodeMaid".ToLower()      { CopyTemplate("CodeMaid/CodeMaid.config")($pwd); break; }
+  "EditorConfig".ToLower()  { CopyTemplate("EditorConfig/.editorconfig")($pwd); break; }
+  "GitIgnore".ToLower()     { CopyTemplate("Git/.gitignore")($pwd); break; }
+  "LicenseHeader".ToLower() { CopyTemplate("LicenseHeader/.licenseheader")($pwd); break; }
+  "MD".ToLower()            { CopyTemplate("Markdown/.markdownlint.json")($pwd); break; }
   "SpellChecker".ToLower()
   {
-    CopyCommonFile("SpellChecker/SpellChecker.ruleset")($pwd);
-    CopyCommonFile("SpellChecker/.vsspell")($pwd);
+    CopyTemplate("SpellChecker/SpellChecker.ruleset")($pwd);
+    CopyTemplate("SpellChecker/.vsspell")($pwd);
     break;
   }
   "StyleCop".ToLower()
   {
-    CopyCommonFile("StyleCop/StyleCop.Analyzers.ruleset")($pwd);
-    CopyCommonFile("StyleCop/stylecop.json")($pwd);
+    CopyTemplate("StyleCop/StyleCop.Analyzers.ruleset")($pwd);
+    CopyTemplate("StyleCop/stylecop.json")($pwd);
     break;
   }
-  "XamlStyler".ToLower() { CopyCommonFile("XamlStyler/Settings.XamlStyler")($pwd); break; }
+  "XamlStyler".ToLower() { CopyTemplate("XamlStyler/Settings.XamlStyler")($pwd); break; }
   default
   {
     Write-Output "Invalid DevOps -get command, '$get'";
