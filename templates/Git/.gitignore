@@ -21,6 +21,13 @@
 *.autorecover
 *.coverage
 
+# Dev-C++
+*.exe
+*.dll
+*.o
+*.layout
+*.win
+
 # SQLite datbases
 *.db3
 
