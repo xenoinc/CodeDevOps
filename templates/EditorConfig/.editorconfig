@@ -18,13 +18,13 @@
 # 3   2017-07-31 - Basic
 #
 # References:
-#   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/code-style-rule-options
-#   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/
+# - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/code-style-rule-options
+# - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/
 #   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules
 #   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/language-rules
 #   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules
-#   - https://github.com/dotnet/roslyn/blob/main/.editorconfig
-#   - https://github.com/microsoft/microsoft-ui-xaml/blob/master/.editorconfig
+# - https://github.com/dotnet/roslyn/blob/main/.editorconfig
+# - https://github.com/microsoft/microsoft-ui-xaml/blob/master/.editorconfig
 #
 
 # Top-most EditorConfig file
