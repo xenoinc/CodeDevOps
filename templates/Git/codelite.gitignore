@@ -1,0 +1,67 @@
+# Copyright 2023 Xeno Innovations, Inc
+# Template for CodeLite
+
+# CodeLite
+**/.codelite
+**/.cache
+**/.ctagsd
+**/build-Debug
+compile_commands.json
+*.mk
+
+# Generic Visual Studio files
+*.bak
+*.csproj.user
+*.suo
+*.vshost.exe
+*.vshost.exe.manifest
+*.exe.config
+*.exp
+*.lib
+*.pdb
+*.pfx
+*.user
+*.vbw
+*.scc
+*.oca
+*.userprefs
+*.userosscache
+*.sln.docstates
+*.autorecover
+*.coverage
+
+# SQLite datbases
+*.db3
+
+# Build results
+[Oo]utput/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+.vs/
+
+# Installer Folder
+/installer/*.exe
+!/installer/autorun.exe
+
+# Lib folder
+/lib/*
+!/lib/readme.txt
+!/lib/readme.md
+
+# Output
+!/[Oo]utput/readme.txt
+!/[Oo]utput/readme.md
+
+## USER DEFINED
+/[Dd]ocs/*.csv
+/[Dd]ocs/backup
+/[Tt]ests
+/[Tt]ools
