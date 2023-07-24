@@ -1,5 +1,12 @@
 # Copyright 2023 Xeno Innovations, Inc
-# Template for C#
+# Template for VSCode
+
+# VSCode PlatformIO
+**/.pio
+**/.vscode/.browse.c_cpp.db*
+**/.vscode/c_cpp_properties.json
+**/.vscode/launch.json
+**/.vscode/ipch
 
 # Generic Visual Studio files
 *.bak
@@ -56,10 +63,6 @@ bld/
 ## NuGet v3's project.json files produces more ignorable files
 *.nuget.props
 *.nuget.targets
-
-# NUnit
-*.VisualState.xml
-TestResult.xml
 
 # Installer Folder
 /installer/*.exe
