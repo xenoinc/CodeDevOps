@@ -30,9 +30,9 @@ Open Windows Terminal `settings.json` via, `Ctrl + Shift + ,`
 
 More info found [here](https://ohmyposh.dev/docs/installation/fonts).
 
-Recommended:
+Recommended Fonts:
 
-* `CaskaydiaMono Nerd Font Mono`
+* [CaskaydiaMono Nerd Font Mon](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaMono.zip)
 * `MesloLGM Nerd Font`
 
 ```json
