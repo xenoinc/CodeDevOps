@@ -9,10 +9,31 @@ Be sure to uninstall, "Posh-GIT", `uninstall-module posh-git`
 1. `winget search oh-my-posh`
 2. `winget install JanDeDobbeleer.OhMyPosh`
 3. `oh-my-posh font install`
-4. Set it to, "M???"
-5. `oh-my-posh get shell`
-6. Get the PowerShell config path, `$profile`
-7. Initialize and set the theme in the next step, "Set Our Theme"
+   1. Select, "Meslo"
+4. Validate shell, `oh-my-posh get shell`
+   1. Should return, `pwsh`
+5. Get the PowerShell config path, `$profile`
+6. Initialize and set the theme in the next step, "Set Our Theme"
+
+### Configure Font
+
+Open Windows Terminal `settings.json` via, `Ctrl + Shift + ,`
+
+More info found [here](https://ohmyposh.dev/docs/installation/fonts).
+
+```json
+    "profiles":
+    {
+        "defaults":
+        {
+            "opacity": 86,
+            "useAcrylic": true,
+            "font":
+            {
+                "face": "MesloLGM Nerd Font"
+            }
+        },
+```
 
 ## Set Our Theme
 
