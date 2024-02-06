@@ -100,8 +100,8 @@
           "style": "plain",
           "foreground": "#40c4ff",
           //"template": "\ue0b0 "
-          // "template": "❯ "
-          "template": "> "
+          // "template": "> "  // Windows standard
+          "template": "❯ "
         }
       ]
     }
