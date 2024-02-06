@@ -33,14 +33,14 @@
             "windows": "\uf17a"
           }
         },
-        {
-          "type": "session",
-          "style": "diamond",
-          "foreground": "#ffffff",
-          /* "background": "#0A703E", */
-          "background": "#0077c2",
-          "template": "{{ .UserName }}"
-        },
+        //{
+        //  "type": "session",
+        //  "style": "diamond",
+        //  "foreground": "#ffffff",
+        //  /* "background": "#0A703E", */
+        //  "background": "#0077c2",
+        //  "template": "{{ .UserName }}"
+        //},
         // {
         //   "type": "text",
         //   "style": "plain",
@@ -100,8 +100,8 @@
           "style": "plain",
           "foreground": "#40c4ff",
           //"template": "\ue0b0 "
-          // "template": "> "  // Windows standard
-          "template": "❯ "
+          // "template": "❯ "
+          "template": "> "
         }
       ]
     }

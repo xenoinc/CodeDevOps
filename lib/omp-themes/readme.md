@@ -1,25 +1,39 @@
 # Oh-My-Posh Themes
 
+## Uninstall POSH-GIT
+
+1. Open Terminal, `$PROFILE`
+2. Remove line, `Import-Module posh-git`
+3. Optional, uninstall the `posh-git` module, `uninstall-module posh-git`
+
 ## Install
 
 Steps to install, [Oh My Posh](https://ohmyposh.dev/)
 
-Be sure to uninstall, "Posh-GIT", `uninstall-module posh-git`
-
 1. `winget search oh-my-posh`
 2. `winget install JanDeDobbeleer.OhMyPosh`
-3. `oh-my-posh font install`
-   1. Select, "Meslo"
+3. Relaunch Termainal window as Administrator
+   1. `oh-my-posh font install`
+   2. Select, "CascadiaMono" or "Meslo"
 4. Validate shell, `oh-my-posh get shell`
    1. Should return, `pwsh`
-5. Get the PowerShell config path, `$profile`
+5. Get the PowerShell config path, `$PROFILE`
 6. Initialize and set the theme in the next step, "Set Our Theme"
+7. Initialze OMP
+   1. `code $PROFILE`
+   2. Add line, `oh-my-posh init pwsh --config "C:\PATH-TO\lib\omp-themes\xeno-clean.omp.json" | Invoke-Expression`
+   3. Reinitialize `. $PROFILE`
 
 ### Configure Font
 
 Open Windows Terminal `settings.json` via, `Ctrl + Shift + ,`
 
 More info found [here](https://ohmyposh.dev/docs/installation/fonts).
+
+Recommended:
+
+* `CaskaydiaMono Nerd Font Mono`
+* `MesloLGM Nerd Font`
 
 ```json
     "profiles":
@@ -30,7 +44,7 @@ More info found [here](https://ohmyposh.dev/docs/installation/fonts).
             "useAcrylic": true,
             "font":
             {
-                "face": "MesloLGM Nerd Font"
+                "face": "CaskaydiaMono Nerd Font Mono"
             }
         },
 ```
