@@ -2,6 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "basedon": "rudolfs-dark",
   "version": 2,
+  // UTF c0des:
+  //  ❯  \u276f
   "blocks": [
     {
       "type": "prompt",
@@ -101,7 +103,7 @@
           "foreground": "#40c4ff",
           //"template": "\ue0b0 "
           // "template": "> "  // Windows standard
-          "template": "❯ "
+          "template": "\u276f "
         }
       ]
     }
