@@ -1,4 +1,4 @@
-# Copyright 2023 Xeno Innovations, Inc
+# Copyright 2024 Xeno Innovations, Inc
 # Template for VSCode
 
 # VSCode PlatformIO
@@ -7,6 +7,12 @@
 **/.vscode/c_cpp_properties.json
 **/.vscode/launch.json
 **/.vscode/ipch
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
 
 # Generic Visual Studio files
 *.bak

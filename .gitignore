@@ -9,3 +9,9 @@
 ud-local.bat
 sandbox/FixTools.bat
 sandbox/_BuildToolsFixed.zip
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
