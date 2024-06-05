@@ -12,15 +12,15 @@ Steps to install, [Oh My Posh](https://ohmyposh.dev/)
 
 1. `winget search oh-my-posh`
 2. `winget install JanDeDobbeleer.OhMyPosh`
-3. Relaunch Termainal window as Administrator
+3. Relaunch terminal window as Administrator
    1. `oh-my-posh font install`
    2. Select, "CascadiaMono" or "Meslo"
 4. Validate shell, `oh-my-posh get shell`
    1. Should return, `pwsh`
 5. Get the PowerShell config path, `$PROFILE`
 6. Initialize and set the theme in the next step, "Set Our Theme"
-7. Initialze OMP
-   1. `code $PROFILE`
+7. Initialize OMP
+   1. `code $PROFILE`  or  `notepad $PROFILE`
    2. Add line, `oh-my-posh init pwsh --config "C:\PATH-TO\lib\omp-themes\xeno-clean.omp.json" | Invoke-Expression`
    3. Reinitialize `. $PROFILE`
 
