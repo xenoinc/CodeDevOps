@@ -32,6 +32,7 @@
 
 function GitCurrentBranch()
 {
+  # "git branch --show-current"
   $cmd = Invoke-Expression "git rev-parse --abbrev-ref HEAD";
   # $cmd = git rev-parse --abbrev-ref HEAD | Out-String
 
