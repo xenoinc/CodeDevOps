@@ -1,6 +1,6 @@
 # PowerShell DevOps
 
-Xeno DevOps (Development Operations) command line tool provides users a quick-set of **Git command helpers** and **project configs** to increase your productivity via PowerShell.
+Xeno Innovations' DevOps (Development Operations) command line tool provides users a quick-set of **Git command helpers** and **project configs** to increase your productivity via PowerShell.
 
 The **Git helpers** provide shortcuts for popular commands such as, `gitpull`, `gitpush`, `gitcommit`, so you don't have to remember switches. Also provides, `gitsync`, which synchronizes your current branch with `develop` (by default) or a branch of our choosing.
 
@@ -152,3 +152,7 @@ GitStatus completed.
 
 Sets a policy
 ``Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser``
+
+## References
+
+Sponsored by, Suess Labs
