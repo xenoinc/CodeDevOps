@@ -1,15 +1,15 @@
-# Copyright 2024 Xeno Innovations, Inc.
+# Copyright 2025 Xeno Innovations, Inc.
 # https://github.com/xenoinc/CodeDevOps
-# Revision: 6.4
+# Revision: 6.4.1
 #
 # This EditorConfig file provides consistent coding styles and formatting
 # structures for your team's projects while preserving your personal defaults.
 #
 # Revision Log
-# 6.4 2024-08-31 - Removed changed C# charset from utf-8-bom to utf-8
+# 6.4 2024-08-31 - Removed changed C# charset from utf-8-bom to utf-8  (6.4.1; VSSpell and cleanup)
 # 6.3 2023-12-16 - Reduced warnings, ignore generated XAML bullshit, added SVG
 # 6.2 2023-xx-xx - Upgraded vsspell_code_analyzer into EditorConfig
-# 6.1 2022-01-21 - Updated rules to include StyleCopAnalyzers. Added Static ReadOnly PascalCase from _camelCase.
+# 6.1 2022-01-21 - Updated rules to include StyleCopAnalyzers. Added Static Readonly PascalCase from _camelCase.
 # 6.0 2022-01-10 - Included defaults from Microsoft to override custom settings
 # 5.2 2021-10-11 - Uniform C# spacing rules and labeled code formatting rules
 # 5.1 2021-09-14 - Added PowerShell and Markdown rules
@@ -39,11 +39,11 @@ end_of_line = crlf
 indent_style = space
 
 # VSSPELL: Spell checker settings for all files
-vsspell_section_id = 844a496250374d009d0aa76e9df49c5a
-#vsspell_ignored_words_844a496250374d009d0aa76e9df49c5a = \transform|csharp|flexify|Guid|ble|html|htmlx|hunspells|jquery|json|mimetype|nav|plaintext|resheader|Suess|Soll|uuid|xaml|xml
-vsspell_ignored_words_844a496250374d009d0aa76e9df49c5a = File:IgnoredWords.dic
-vsspell_exclusion_expressions_844a496250374d009d0aa76e9df49c5a = [a-z]{2}-([A-Z]{2}|Cyrl|Latn)(?@@PND@@/Options/None)\\\\\w+(?@@PND@@/Options/None)
-vsspell_dictionary_languages_844a496250374d009d0aa76e9df49c5a = en-US
+vsspell_section_id = 001
+#vsspell_ignored_words_001 = \transform|csharp|flexify|Guid|ble|html|htmlx|hunspells|jquery|json|mimetype|nav|plaintext|resheader|Suess|Soll|uuid|xaml|xml
+vsspell_ignored_words_001 = File:IgnoredWords.dic
+vsspell_dictionary_languages_001 = en-US
+vsspell_exclusion_expressions_001 = [a-z]{2}-([A-Z]{2}|Cyrl|Latn)(?@@PND@@/Options/None)\\\\\w+(?@@PND@@/Options/None)
 
 vsspell_code_analyzer_ignore_identifier_if_private = true
 vsspell_code_analyzer_ignore_identifier_if_internal = true
@@ -79,8 +79,9 @@ trim_trailing_whitespace = true
 [*.{xml,xaml,axml,axaml}]
 indent_style = space
 indent_size = 2
-charset = utf-8-bom
+charset = utf-8
 trim_trailing_whitespace = true
+insert_final_newline = true
 
 [*.json]
 indent_style = space
@@ -180,7 +181,7 @@ csharp_preferred_modifier_order = public,private,protected,internal,static,exter
 dotnet_separate_import_directive_groups = false
 dotnet_sort_system_directives_first = true
 file_header_template = unset
-# file_header_template = Copyright Xeno Innovations, Inc. 2022\nSee the LICENSE file in the project root for more information.
+# file_header_template = Copyright Xeno Innovations, Inc. 2025\nSee the LICENSE file in the project root for more information.
 
 # this. and Me. preferences
 dotnet_style_qualification_for_event = false
@@ -419,6 +420,9 @@ dotnet_diagnostic.VSSpell002.severity = none
 
 # SA0001: XML comment analysis is disabled due to project configuration
 dotnet_diagnostic.SA0001.severity = none
+
+# S3267: Loops should be simplified with "LINQ" expressions
+dotnet_diagnostic.S3267.severity = none
 
 # Generated XAML bullshit
 [*.sg.cs]
