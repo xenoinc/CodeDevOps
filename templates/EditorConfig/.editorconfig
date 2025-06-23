@@ -1,11 +1,12 @@
 # Copyright 2025 Xeno Innovations, Inc.
 # https://github.com/xenoinc/CodeDevOps
-# Revision: 6.4.1
+# Revision: 7.0
 #
 # This EditorConfig file provides consistent coding styles and formatting
 # structures for your team's projects while preserving your personal defaults.
 #
 # Revision Log
+# 7.0 2025-06-20 - C++ Rules
 # 6.4 2024-08-31 - Removed changed C# charset from utf-8-bom to utf-8  (6.4.1; VSSpell and cleanup)
 # 6.3 2023-12-16 - Reduced warnings, ignore generated XAML bullshit, added SVG
 # 6.2 2023-xx-xx - Upgraded vsspell_code_analyzer into EditorConfig
@@ -28,6 +29,7 @@
 #   - https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules
 # - https://github.com/dotnet/roslyn/blob/main/.editorconfig
 # - https://github.com/microsoft/microsoft-ui-xaml/blob/master/.editorconfig
+# - https://learn.microsoft.com/en-us/visualstudio/ide/cpp-editorconfig-properties
 #
 
 # Top-most EditorConfig file
@@ -40,7 +42,7 @@ indent_style = space
 
 # VSSPELL: Spell checker settings for all files
 vsspell_section_id = 001
-#vsspell_ignored_words_001 = \transform|csharp|flexify|Guid|ble|html|htmlx|hunspells|jquery|json|mimetype|nav|plaintext|resheader|Suess|Soll|uuid|xaml|xml
+#vsspell_ignored_words_001 = \transform|csharp|Guid|ble|html|htmlx|hunspells|jquery|json|mimetype|nav|plaintext|resheader|Suess|Soll|uuid|xaml|xml
 vsspell_ignored_words_001 = File:IgnoredWords.dic
 vsspell_dictionary_languages_001 = en-US
 vsspell_exclusion_expressions_001 = [a-z]{2}-([A-Z]{2}|Cyrl|Latn)(?@@PND@@/Options/None)\\\\\w+(?@@PND@@/Options/None)
@@ -65,11 +67,17 @@ insert_final_newline = true
 [*.{c,cpp,h}]
 indent_style = space
 indent_size = 2
+insert_final_newline = true
 trim_trailing_whitespace = true
 
 cpp_indent_case_contents = true
 cpp_indent_case_contents_when_block = true
 cpp_indent_case_labels = true
+cpp_space_pointer_reference_alignment = left
+cpp_indent_goto_labels = leftmost_column
+cpp_indent_preprocessor = leftmost_column
+cpp_new_line_before_open_brace_namespace = new_line
+cpp_new_line_before_open_brace_function = new_line
 
 [*.sql]
 indent_style = space
