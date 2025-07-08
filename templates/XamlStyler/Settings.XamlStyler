@@ -15,7 +15,8 @@
     "x:Class",
     "x:*",
     "*:*",
-    "Key, Name, Uid, Title, Text",
+    "Key, Name, Uid, Title",
+    "Text, Content",
     "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
     "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight",
     "Margin, Padding, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
@@ -25,7 +26,7 @@
     "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText",
     "Storyboard.*, From, To, Duration"
   ],
-  "FirstLineAttributes": "Text",
+  "FirstLineAttributes": "Text, Content",
   "OrderAttributesByName": true,
   "PutEndingBracketOnNewLine": false,
   "RemoveEndingTagOfEmptyElement": true,
