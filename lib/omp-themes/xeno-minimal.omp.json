@@ -1,5 +1,8 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+
+  // UTF c0des:
+  //  \u276f  '❯'
   "blocks": [
     {
       "type": "prompt",
@@ -36,6 +39,8 @@
         },
         {
           "properties": {
+            // "folder_icon": "\uf115",
+            // "folder_separator_icon": "\ue0b1",
             "cache_duration": "none",
             "folder_icon": "\u2026",
             "folder_separator_icon": "/",
@@ -51,13 +56,14 @@
         },
         {
           "properties": {
+            // "branch_max_length": 30,
             "branch_icon": "\ue0a0 ",
             "cache_duration": "none",
             "fetch_stash_count": false,
             "fetch_status": true,
             "fetch_upstream_icon": true
           },
-          "template": " {{.UpstreamIcon}}{{.HEAD}}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}\u276f",
+          "template": " {{.UpstreamIcon}}{{.HEAD}}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }}\u276f ",
           "foreground": "#40c4ff",
           "type": "git",
           "style": "diamond"
