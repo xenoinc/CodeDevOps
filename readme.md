@@ -12,10 +12,16 @@ This project started as an internal tool used by Xeno Innovations and Suess Labs
 
 ## Installation
 
-1. Download or clone the repo your local folder (_i.e. ``C:\BuildTools\``_)
+1. Download or clone the repo
+   * `CD C:\`
+   * `git clone https://github.com/xenoinc/CodeDevOps.git BuildTools`
 2. Set your ``Path`` **Environment Variables** to your extracted folder.
-3. Close and re-open any open command prompts
-4. _Enjoy!_
+3. Enable, PowerShell Execution Policy (_see below_)
+   * `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+4. Close and re-open any open command prompts
+5. _Enjoy!_
+
+
 
 ## Road map
 
@@ -140,18 +146,23 @@ Deleted:                       1
 GitStatus completed.
 ```
 
-## PowerShell
+## PowerShell  Execution Policies
 
-### Execution Policies
+Sample commands for getting execution policy
 
-``get-executionpolicy``
+```powershell
+# Get current policy
+get-executionpolicy
 
-``get-executionpolicy -list``
+# Get list of policy
+get-executionpolicy -list
 
-``get-executionpolicy -scope currentuser``
+# Get Current User's policy
+get-executionpolicy -scope currentuser
 
-Sets a policy
-``Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser``
+# Sets a policy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
 
 ## References
 
