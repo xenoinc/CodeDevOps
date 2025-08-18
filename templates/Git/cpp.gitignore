@@ -1,5 +1,5 @@
 # Copyright 2025 Xeno Innovations, Inc
-# Generic Template
+# Generic C++ Template
 
 # Binary and Executables
 *.exe
@@ -26,6 +26,20 @@
 *.sln.docstates
 *.autorecover
 *.coverage
+
+## Visual Studio C++
+*.aps
+*.ncb
+*.plg
+*.opt
+*.vcproj
+*.vcproj.vspscc
+*.vssscc
+
+## Dev-C++
+*.o
+*.layout
+*.win
 
 # VS Code
 .vscode/*

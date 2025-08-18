@@ -1,10 +1,5 @@
-# Copyright 2025 Xeno Innovations, Inc
-# Generic Template
-
-# Binary and Executables
-*.exe
-*.dll
-*.o
+# Copyright 2024 Xeno Innovations, Inc
+# Template for C#
 
 # Generic Visual Studio files
 *.bak
