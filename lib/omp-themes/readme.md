@@ -14,17 +14,32 @@ Steps to install, [Oh My Posh](https://ohmyposh.dev/)
 2. `winget install JanDeDobbeleer.OhMyPosh`
 3. Relaunch terminal window as Administrator
    1. `oh-my-posh font install`
-   2. Select, "CascadiaMono" or "Meslo"
+   2. See, [Configure Font](#configure-font) below. Or, continue.
+   3. Select:
+      * "CascadiaMono" (_recommended by XI_)
+      * "Meslo"
 4. Validate shell, `oh-my-posh get shell`
    1. Should return, `pwsh`
 5. Get the PowerShell config path, `$PROFILE`
 6. Initialize and set the theme in the next step, "Set Our Theme"
 7. Initialize OMP
    1. `code $PROFILE`  or  `notepad $PROFILE`
-   2. Add line, `oh-my-posh init pwsh --config "C:\PATH-TO\lib\omp-themes\xeno-clean.omp.json" | Invoke-Expression`
+   2. Add the one of the following lines (1st recommended)
+      * `oh-my-posh init pwsh --config "C:\BuildTools\lib\omp-themes\xeno-minimal.omp.json" | Invoke-Expression`
+      * `oh-my-posh init pwsh --config "C:\PATH-TO\lib\omp-themes\xeno-clean.omp.json" | Invoke-Expression`
    3. Reinitialize `. $PROFILE`
 
 ### Configure Font
+
+0. Close the terminal
+1. Download font:
+   * [CaskaydiaMono Nerd Font Mono](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaMono.zip)
+2. Extract, "CaskaydiaMonoNerdFontMono-Regular.ttf"
+3. Right Click > (Show more options) > Install for All Users
+   * WARNING: Performing { Open the file > "Install" } may only install for one user.
+4. Open **Windows Terminal**
+5. Profiles > "PowerShell" (or, "Defaults")> Additional Settings > Appearance
+6. Font Face > "CaskaydiaMonoNerdFontMono-Regular.ttf
 
 Open Windows Terminal `settings.json` via, `Ctrl + Shift + ,`
 
@@ -32,7 +47,7 @@ More info found [here](https://ohmyposh.dev/docs/installation/fonts).
 
 Recommended Fonts:
 
-* [CaskaydiaMono Nerd Font Mon](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/CascadiaMono.zip)
+* [CaskaydiaMono Nerd Font Mon](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaMono.zip)
 * `MesloLGM Nerd Font`
 
 ```json

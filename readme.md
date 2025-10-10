@@ -18,8 +18,10 @@ This project started as an internal tool used by Xeno Innovations and Suess Labs
 2. Set your ``Path`` **Environment Variables** to your extracted folder.
 3. Enable, PowerShell Execution Policy (_see below_)
    * `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
-4. Close and re-open any open command prompts
-5. _Enjoy!_
+4. Install Oh-My-Posh
+   * See, [Readme.md](lib/omp-themes/readme.md)
+5. Close and re-open any open command prompts
+6. _Enjoy!_
 
 
 
