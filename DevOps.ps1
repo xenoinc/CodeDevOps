@@ -49,12 +49,13 @@ function DisplayHelp()
   Write-Output "";
   Write-Output "Options:";
   Write-Output "  ALL           - Updates all files except GitIgnore";
-  Write-Output "  CodeMaid";
-  Write-Output "  EditorConfig";
-  Write-Output "  GitIgnore";
-  Write-Output "  LicenseHeader - License Header specifications";
+  Write-Output "  ClangFormat   - .clang-format file";
+  Write-Output "  CodeMaid      - C# 'CodeMaid.config' file";
+  Write-Output "  EditorConfig  - Generic configuration for all languages";
+  Write-Output "  GitIgnore     - Generic .gitignore for common projects";
+  Write-Output "  LicenseHeader - Visual Studio License Header specifications (deprecated)";
   Write-Output "  MD            - Markdown Lint";
-  Write-Output "  SpellChecker";
+  Write-Output "  SpellChecker  - '.vsspell' (deprecated; use EditorConfig)";
   Write-Output "  StyleCop";
   Write-Output "  XamlStyler";
 }
@@ -70,10 +71,11 @@ $get = $get.Trim();
 
 switch -Exact ($get.ToLower())
 {
-  # "StyleCop".ToLower() { GetStyleCop; break; }
+  # "all" files switch
   "all".ToLower()
   {
     Write-Output "** Updating All **";
+    CopyTemplate("Clang-Format/.clang-format")($pwd);
     CopyTemplate("CodeMaid/CodeMaid.config")($pwd);
     CopyTemplate("EditorConfig/.editorconfig")($pwd);
     CopyTemplate("LicenseHeader/.licenseheader")($pwd);
@@ -86,6 +88,8 @@ switch -Exact ($get.ToLower())
     break;
   }
 
+  # Individual arguments
+  "ClangFormat".ToLower()   { CopyTemplate("Clang-Format/.clang-format")($pwd); break; }
   "CodeMaid".ToLower()      { CopyTemplate("CodeMaid/CodeMaid.config")($pwd); break; }
   "EditorConfig".ToLower()  { CopyTemplate("EditorConfig/.editorconfig")($pwd); break; }
   "GitIgnore".ToLower()     { CopyTemplate("Git/.gitignore")($pwd); break; }
