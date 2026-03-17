@@ -12,9 +12,11 @@ AlignOperands: 'true'
 AlignTrailingComments: 'true'
 BreakBeforeBraces: Allman
 ColumnLimit: '120'
+ContinuationIndentWidth: '2'
 IncludeBlocks: Regroup
 IndentCaseLabels: 'true'
 IndentWidth: '2'
+InsertNewlineAtEOF: true
 MaxEmptyLinesToKeep: '1'
 NamespaceIndentation: All
 SortIncludes: 'true'
