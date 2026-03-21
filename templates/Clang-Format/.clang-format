@@ -13,7 +13,7 @@ AlignTrailingComments: 'true'
 BreakBeforeBraces: Allman
 ColumnLimit: '120'
 ContinuationIndentWidth: '2'
-IncludeBlocks: Regroup
+IncludeBlocks: Merge
 IndentCaseLabels: 'true'
 IndentWidth: '2'
 InsertNewlineAtEOF: true
@@ -30,5 +30,4 @@ SpacesInParentheses: 'false'
 SpacesInSquareBrackets: 'false'
 TabWidth: '2'
 UseTab: Never
-
 ...
