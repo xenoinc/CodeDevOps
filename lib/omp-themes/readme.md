@@ -13,21 +13,43 @@ Steps to install, [Oh My Posh](https://ohmyposh.dev/)
 1. `winget search oh-my-posh`
 2. `winget install JanDeDobbeleer.OhMyPosh`
 3. Relaunch terminal window as Administrator
-   1. `oh-my-posh font install`
-   2. See, [Configure Font](#configure-font) below. Or, continue.
-   3. Select:
-      * "CascadiaMono" (_recommended by XI_)
-      * "Meslo"
+   1. METHOD 1: `oh-my-posh font install CascadiaMono`
+   2. METHOD 2: Manual installation
+      1. https://www.nerdfonts.com/font-downloads
+      2. (CaskaydiaMonoNerdFontMono-Regular.ttf)
+   3. METHOD 3: `oh-my-posh font install`
+      1. See, [Configure Font](#configure-font) below. Or, continue.
+      2. Select:
+         * "CascadiaMono" (_recommended by XI_)
+           * Full Name: "CaskaydiaMono Nerd Font Mono"
+           * Reserved Font Name: "Cascadia Mono"
 4. Validate shell, `oh-my-posh get shell`
    1. Should return, `pwsh`
 5. Get the PowerShell config path, `$PROFILE`
 6. Initialize and set the theme in the next step, "Set Our Theme"
 7. Initialize OMP
    1. `code $PROFILE`  or  `notepad $PROFILE`
-   2. Add the one of the following lines (1st recommended)
+   2. Offical standard:
+      > ```pwsh
+      > # 2025-10-08
+      > oh-my-posh init pwsh --config "C:\BuildTools\lib\omp-themes\xeno-minimal.omp.json" | Invoke-Expression
+      > ```
+   3. Add the one of the following lines (1st recommended)
       * `oh-my-posh init pwsh --config "C:\BuildTools\lib\omp-themes\xeno-minimal.omp.json" | Invoke-Expression`
       * `oh-my-posh init pwsh --config "C:\PATH-TO\lib\omp-themes\xeno-clean.omp.json" | Invoke-Expression`
-   3. Reinitialize `. $PROFILE`
+   4. Reinitialize `. $PROFILE`
+
+### Configure Visual Studio
+
+#### Visual Studio
+
+1. Tools > Options > Environment > Fonts and Colors > Terminal
+2. Select font
+
+#### VS Code
+
+1. `CTRL + ,`
+2. `"terminal.integrated.fontFamily": "CaskaydiaMono Nerd Font Mono"`
 
 ### Configure Font
 
@@ -49,6 +71,10 @@ Recommended Fonts:
 
 * [CaskaydiaMono Nerd Font Mon](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaMono.zip)
 * `MesloLGM Nerd Font`
+
+1. Launch Terminal
+2. `ctrl + shift + ,`
+3. Edit with the following:
 
 ```json
     "profiles":
