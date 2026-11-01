@@ -42,9 +42,21 @@ Fetch and prune your repository. Optionally ``sync`` with remote, removing local
 
 #### Usage
 ```
-GitPrune          ; Fetch and prune
-GitPrune -sync    ; Remove local branches already merged
+GitPrune                        # Fetch and prune remote-tracking refs for origin
+GitPrune -Sync -WhatIf           # Preview locals whose configured upstream is gone
+GitPrune -Sync                   # Delete those local branches with git branch -d
+GitPrune -All -WhatIf  # Preview all local names absent from origin
+GitPrune -All          # Delete those local branches with git branch -d
+GitPrune -All -Remote upstream # Select another remote
+GitPrune -All -Force   # Allow deletion of unmerged branches
 ```
+
+`-All` includes branches that never had an upstream and compares names
+case-sensitively. `-Sync` follows the configured upstream, even if its name differs.
+Branches checked out in any worktree are skipped. `-Sync` now uses safe deletion
+instead of forcing it; use `-Force` explicitly when needed. `-WhatIf` still fetches
+and prunes remote-tracking refs, but does not delete local branches. A failed fetch
+stops cleanup. No branches are deleted on the remote server.
 
 ### GitPush
 Pushes your branch to ``origin`` without the annoying prompt when you're not tracking

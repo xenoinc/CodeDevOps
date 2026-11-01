@@ -114,8 +114,21 @@ Fetch and prune your repository.
 #### Usage
 
 ```powershell
-GitPrune          ; Fetch and prune
+GitPrune                         # Fetch and prune origin's remote-tracking refs
+GitPrune -Sync -WhatIf            # Preview locals whose origin upstream is gone
+GitPrune -Sync                    # Delete those local branches
+GitPrune -All -WhatIf   # Preview all local names missing from origin
+GitPrune -All           # Delete those local branches
+GitPrune -All -Remote upstream # Compare against another remote
+GitPrune -All -Force    # Also allow deletion of unmerged branches
 ```
+
+`-Sync` uses each branch's configured upstream; `-All` compares branch
+names, including branches with no upstream. Both skip branches checked out in any
+worktree. Deletion uses `git branch -d` unless `-Force` is supplied. `-Sync` previously
+force-deleted branches; it now uses this same safe default. `-WhatIf` still fetches
+and prunes remote-tracking refs to refresh the comparison, but deletes no local
+branches. No branches are deleted on the remote server. A failed fetch stops cleanup.
 
 ### [GitPush](https://github.com/xenoinc/XenoDevOps/wiki/GitPush)
 
