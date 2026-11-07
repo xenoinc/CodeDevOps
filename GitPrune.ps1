@@ -4,16 +4,16 @@
   Revision: 2 - 2026-11-01
 
   Usage:
-    GitPrune                         ; Fetch and prune origin
-    GitPrune -Sync                   ; Delete locals whose remote upstream is gone
-    GitPrune -DeleteMissing          ; Delete local names missing from the remote
-    GitPrune -DeleteMissing -WhatIf  ; Preview local branch deletion
-    GitPrune -DeleteMissing -Force   ; Also delete unmerged local branches
-    GitPrune -DeleteMissing -Remote upstream ; Compare against another remote
+    GitPrune                ; Fetch and prune origin
+    GitPrune -Sync          ; Delete locals whose remote upstream is gone
+    GitPrune -All           ; Delete local names missing from the remote
+    GitPrune -All -WhatIf   ; Preview local branch deletion
+    GitPrune -All -Force    ; Also delete unmerged local branches
+    GitPrune -All -Remote [upstream] ; Compare against another remote
 
   Notes:
-    - Remote defaults to origin. No branches are deleted on the server.
-    - Sync checks configured upstreams; DeleteMissing compares branch names,
+    - Remote defaults to `origin`. No branches are deleted on the server.
+    - Sync checks configured upstreams; All compares branch names,
       including branches with no upstream. Names are case-sensitive.
     - Branches checked out in any worktree are skipped.
     - Deletion uses git branch -d; Force uses git branch -D.
@@ -21,13 +21,13 @@
     - A failed fetch stops local branch cleanup.
 
   Change Log:
-    2026-11-01 - 0.2 - Added DeleteMissing, Remote, Force, and WhatIf support
+    2026-11-01 - 0.2 - Added All, Remote, Force, and WhatIf support
     2019-03-21 - 0.1 - Created
 #>
 [CmdletBinding(SupportsShouldProcess = $true)]
 param(
   [switch] $Sync,
-  [switch] $DeleteMissing,
+  [switch] $All,
   [ValidateNotNullOrEmpty()]
   [string] $Remote = 'origin',
   [switch] $Force
@@ -41,20 +41,29 @@ if ($remotes -cnotcontains $Remote) { throw "Remote '$Remote' is not configured 
 
 # Fetch first; a failed fetch must never lead to local deletion.
 git fetch --prune -- $Remote
-if ($LASTEXITCODE -ne 0) { throw "Fetch/prune failed for '$Remote'; no local branches were deleted." }
+if ($LASTEXITCODE -ne 0) {
+  throw "Fetch/prune failed for '$Remote'; no local branches were deleted."
+}
 
-if (-not ($Sync -or $DeleteMissing)) {
+if (-not ($Sync -or $All)) {
   Write-Host "Fetch and prune completed for '$Remote'." -ForegroundColor Green
   return
 }
 
 $remotePrefix = "refs/remotes/$Remote/"
 $remoteRefs = @(git for-each-ref '--format=%(refname)' refs/remotes/)
-if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate remote-tracking branches.' }
+
+if ($LASTEXITCODE -ne 0) {
+  throw 'Cannot enumerate remote-tracking branches.'
+}
+
 $remoteNames = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::Ordinal)
 $remoteRefSet = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::Ordinal)
-foreach ($ref in $remoteRefs) {
-  if ($ref.StartsWith($remotePrefix, [StringComparison]::Ordinal)) {
+
+foreach ($ref in $remoteRefs)
+{
+  if ($ref.StartsWith($remotePrefix, [StringComparison]::Ordinal))
+  {
     [void] $remoteRefSet.Add($ref)
     [void] $remoteNames.Add($ref.Substring($remotePrefix.Length))
   }
@@ -68,13 +77,17 @@ $deleted = 0
 $failed = @()
 foreach ($line in $localRefs) {
   $branch, $upstream, $worktreePath = $line -split "`t", 3
-  if ($DeleteMissing) {
+
+  if ($All) {
     $candidate = -not $remoteNames.Contains($branch)
   } else {
-    $candidate = $upstream.StartsWith($remotePrefix, [StringComparison]::Ordinal) -and
-      -not $remoteRefSet.Contains($upstream)
+    $candidate = $upstream.StartsWith($remotePrefix, [StringComparison]::Ordinal)
+      -and -not $remoteRefSet.Contains($upstream)
   }
-  if (-not $candidate) { continue }
+
+  if (-not $candidate) {
+    continue
+  }
 
   if ($worktreePath) {
     Write-Warning "Skipping '$branch': checked out in '$worktreePath'."
@@ -83,12 +96,17 @@ foreach ($line in $localRefs) {
 
   $deleteOption = '-d'
   $action = 'Delete local branch (git branch -d)'
-  if ($Force) {
+
+  if ($Force)
+  {
     $deleteOption = '-D'
     $action = 'Force-delete local branch, including unmerged commits (git branch -D)'
   }
-  if ($PSCmdlet.ShouldProcess($branch, $action)) {
+
+  if ($PSCmdlet.ShouldProcess($branch, $action))
+  {
     git branch $deleteOption -- $branch
+
     if ($LASTEXITCODE -ne 0) {
       $failed += $branch
     } else {
@@ -100,4 +118,5 @@ foreach ($line in $localRefs) {
 if ($failed.Count -gt 0) {
   throw "Could not delete local branches: $($failed -join ', '). Git's diagnostics above explain why."
 }
+
 Write-Host "Git prune completed. Deleted $deleted local branch(es)." -ForegroundColor Green
